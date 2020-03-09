@@ -1,5 +1,9 @@
 package com.hfs.lib;
 
+import com.hfs.lib.activity.Activity;
+import com.hfs.lib.activity.FinishedActivity;
+import com.hfs.lib.activity.UnfinishedActivity;
+
 import java.util.Date;
 
 public class Schedule {

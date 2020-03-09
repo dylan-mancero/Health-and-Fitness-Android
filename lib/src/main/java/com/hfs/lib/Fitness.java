@@ -1,6 +1,8 @@
 package com.hfs.lib;
 
 
+import com.hfs.lib.activity.FinishedActivity;
+
 public class Fitness {
 
 	private double caloriesBurned;

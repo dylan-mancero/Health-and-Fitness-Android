@@ -1,5 +1,15 @@
 package com.hfs.lib;
 
+import com.hfs.lib.activity.Activity;
+import com.hfs.lib.activity.UnfinishedActivity;
+import com.hfs.lib.repo.Exercises;
+import com.hfs.lib.activity.FinishedActivity;
+import com.hfs.lib.repo.Sports;
+import com.hfs.lib.nutrition.Consumable;
+import com.hfs.lib.nutrition.ConsumableOccurance;
+import com.hfs.lib.repo.Consumables;
+import com.hfs.lib.nutrition.Nutrition;
+
 import java.util.Date;
 
 public class StandardProfile {
