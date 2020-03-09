@@ -163,10 +163,4 @@ public class StandardProfile {
 		this.weight = weight;
 	}
 
-	// TODO - KJ: Fix access to hashCode
-	private int hashCode() {
-		// TODO - implement StandardProfile.hashCode
-		throw new UnsupportedOperationException();
-	}
-
 }

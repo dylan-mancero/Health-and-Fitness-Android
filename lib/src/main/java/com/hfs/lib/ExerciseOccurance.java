@@ -6,13 +6,13 @@ public class ExerciseOccurance extends ActivityOccurance {
 	private int reps;
 
 	/**
-	 * 
+	 *
 	 * @param exercise
 	 * @param sets
 	 * @param reps
 	 */
 	public ExerciseOccurance(Exercise exercise, int sets, int reps) {
-		// TODO - KJ: Fix Constructor.
+		super(exercise);
 		// TODO - implement ExerciseOccurance.ExerciseOccurance
 		throw new UnsupportedOperationException();
 	}
@@ -25,8 +25,8 @@ public class ExerciseOccurance extends ActivityOccurance {
 		return this.reps;
 	}
 
-	public ActivityReport getReport() {
-		// TODO - implement ExerciseOccurance.getReport
+	public ActivityReport getActivityReport() {
+		// TODO - implement ExerciseOccurance.getActivityReport
 		throw new UnsupportedOperationException();
 	}
 

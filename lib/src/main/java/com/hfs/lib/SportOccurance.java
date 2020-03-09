@@ -13,13 +13,13 @@ public class SportOccurance extends ActivityOccurance {
 	 * @param sport
 	 */
 	public SportOccurance(Sport sport) {
-		// TODO - KJ: Fix Constructor.
+		super(sport);
 		// TODO - implement SportOccurance.SportOccurance
 		throw new UnsupportedOperationException();
 	}
 
-	public ActivityReport getReport() {
-		// TODO - implement SportOccurance.getReport
+	public ActivityReport getActivityReport() {
+		// TODO - implement SportOccurance.getActivityReport
 		throw new UnsupportedOperationException();
 	}
 

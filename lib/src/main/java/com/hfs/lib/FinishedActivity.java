@@ -2,7 +2,7 @@ package com.hfs.lib;
 
 import java.util.Date;
 
-// TODO - KJ: Check if this class should declare a getReport()
+// TODO - KJ: Check if this class should declare a getActivityReport()
 public class FinishedActivity implements ReportableStrategy {
 
 	private Date end;
