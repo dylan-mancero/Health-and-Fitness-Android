@@ -15,11 +15,14 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:text="Add Food Item"
-        tools:layout_editor_absoluteX="158dp"
-        tools:layout_editor_absoluteY="356dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/searchView2"
+        app:layout_constraintStart_toStartOf="@+id/searchView2"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <SearchView
-        android:layout_width="414dp"
+        android:id="@+id/searchView2"
+        android:layout_width="376dp"
         android:layout_height="60dp"
         android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="parent"
