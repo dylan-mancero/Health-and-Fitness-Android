@@ -10,7 +10,7 @@ import com.hfs.lib.nutrition.ConsumableOccurance;
 import com.hfs.lib.repo.Consumables;
 import com.hfs.lib.nutrition.Nutrition;
 
-import java.util.Date;
+import java.time.OffsetDateTime;
 
 public class StandardProfile {
 
@@ -18,6 +18,13 @@ public class StandardProfile {
 	private int sharablePin;
 	private double height;
 	private double weight;
+	private Goal goal;
+	private Nutrition nutrition;
+	private Schedule schedule;
+	private Fitness fitness;
+	private Sports sports;
+	private Exercises exercise;
+	private Consumables consumable;
 
 	/**
 	 * 
@@ -29,8 +36,14 @@ public class StandardProfile {
 	 * @param consumables
 	 */
 	public StandardProfile(Nutrition nutrition, Schedule schedule, Fitness fitness, Sports sports, Exercises exercises, Consumables consumables) {
-		// TODO - implement StandardProfile.StandardProfile
-		throw new UnsupportedOperationException();
+	    this.nutrition = nutrition;
+	    this.schedule = schedule;
+	    this.fitness = fitness;
+
+	    // Repositories.
+	    this.sports = sports;
+	    this.exercise = exercises;
+	    this.consumable = consumables;
 	}
 
 	public int getSharablePin() {
@@ -42,13 +55,11 @@ public class StandardProfile {
 	 * @param activity
 	 */
 	public UnfinishedActivity startActivitySession(Activity activity) {
-		// TODO - implement StandardProfile.startActivitySession
-		throw new UnsupportedOperationException();
+		return new UnfinishedActivity(activity);
 	}
 
-	public UnfinishedActivity[] getFutureActiviitySessions() {
-		// TODO - implement StandardProfile.getFutureActiviitySessions
-		throw new UnsupportedOperationException();
+	public UnfinishedActivity[] getFutureActivitySessions() {
+	    return this.schedule.getFutureActivitySessions();
 	}
 
 	/**
@@ -56,9 +67,8 @@ public class StandardProfile {
 	 * @param activity
 	 * @param startTime
 	 */
-	public void addFutureActivitySession(Activity activity, Date startTime) {
-		// TODO - implement StandardProfile.addFutureActivitySession
-		throw new UnsupportedOperationException();
+	public void addFutureActivitySession(Activity activity, OffsetDateTime startTime) {
+	    this.schedule.addFutureActivitySession(activity,startTime);
 	}
 
 	/**
@@ -66,78 +76,47 @@ public class StandardProfile {
 	 * @param activity
 	 */
 	public void removeActivitySession(UnfinishedActivity activity) {
-		// TODO - implement StandardProfile.removeActivitySession
-		throw new UnsupportedOperationException();
+		this.schedule.removeActivitySession(activity);
 	}
 
 	public FinishedActivity[] getPastActivitySessions() {
-		// TODO - implement StandardProfile.getPastActivitySessions
-		throw new UnsupportedOperationException();
+	    return this.fitness.getActivitySessions();
 	}
 
-	/**
-	 * 
-	 * @param activity
-	 */
 	public void addPastActivitySession(FinishedActivity activity) {
-		// TODO - implement StandardProfile.addPastActivitySession
-		throw new UnsupportedOperationException();
+		this.fitness.addActivitySession(activity);
 	}
 
-	/**
-	 * 
-	 * @param activity
-	 */
 	public void removeActivitySession(FinishedActivity activity) {
-		// TODO - implement StandardProfile.removeActivitySession
-		throw new UnsupportedOperationException();
+	    this.fitness.removeActivitySession(activity);
 	}
 
 	public boolean isSharingReports() {
-		// TODO - implement StandardProfile.isSharingReports
-		throw new UnsupportedOperationException();
+	    return this.reportSharing;
 	}
 
-	/**
-	 * 
-	 * @param reportSharing
-	 */
 	public void setReportSharing(boolean reportSharing) {
 		this.reportSharing = reportSharing;
 	}
 
 	public Nutrition getNutrition() {
-		// TODO - implement StandardProfile.getNutrition
-		throw new UnsupportedOperationException();
+	    return this.nutrition;
 	}
 
 	public ConsumableOccurance[] getConsumption() {
-		// TODO - implement StandardProfile.getConsumption
-		throw new UnsupportedOperationException();
+	    return this.nutrition.getConsumables();
 	}
 
-	/**
-	 * 
-	 * @param consumable
-	 * @param amount
-	 */
 	public void consume(Consumable consumable, double amount) {
-		// TODO - implement StandardProfile.consume
-		throw new UnsupportedOperationException();
+	    this.nutrition.addConsumable(consumable, amount);
 	}
 
-	/**
-	 * 
-	 * @param consumable
-	 */
 	public void addNewConsumable(Consumable consumable) {
-		// TODO - implement StandardProfile.addNewConsumable
-		throw new UnsupportedOperationException();
+	    this.consumable.addConsumable(consumable);
 	}
 
 	public Goal getGoal() {
-		// TODO - implement StandardProfile.getGoal
-		throw new UnsupportedOperationException();
+	    return this.goal;
 	}
 
 	/**
@@ -145,8 +124,7 @@ public class StandardProfile {
 	 * @param goal
 	 */
 	public void setGoal(Goal goal) {
-		// TODO - implement StandardProfile.setGoal
-		throw new UnsupportedOperationException();
+		this.goal = goal;
 	}
 
 	public double getHeight() {

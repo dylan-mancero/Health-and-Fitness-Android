@@ -40,7 +40,7 @@ public class SportOccurrence extends ActivityOccurrence {
 		this.report = new ActivityReport(reportBuffer.toString());
 	}
 
-	private static double calculateCaloriesBurned(Duration duration, Sport sport){
+	public static double calculateCaloriesBurned(Duration duration, Sport sport){
 		return duration.get(ChronoUnit.SECONDS) * sport.getCalorieMultiplier();
 	}
 

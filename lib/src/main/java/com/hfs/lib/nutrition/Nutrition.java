@@ -54,8 +54,8 @@ public class Nutrition {
 		this.sugar = itemConsumed.getSugar() * amountConsumed;
 	}
 
-	public List<ConsumableOccurance> getConsumables() {
-		return consumables;
+	public ConsumableOccurance[] getConsumables() {
+		return this.consumables.toArray(new ConsumableOccurance[this.consumables.size()]);
 	}
 
 	public double getProtein() {

@@ -1,6 +1,7 @@
 package com.hfs.lib;
 
 import java.awt.Image;
+import java.time.OffsetDateTime;
 import java.util.Date;
 
 public class Account {
@@ -8,8 +9,9 @@ public class Account {
 	private String username;
 	private String password;
 	private String email;
-	private Date dateOfBirth;
+	private OffsetDateTime dateOfBirth;
 	private Image image;
+	private Gender gender;
 
 	/**
 	 * 
@@ -19,9 +21,13 @@ public class Account {
 	 * @param dateOfBirth
 	 * @param gender
 	 */
-	public Account(String username, String password, String email, Date dateOfBirth, Gender gender) {
-		// TODO - implement Account.Account
-		throw new UnsupportedOperationException();
+	public Account(String username, String password, String email, OffsetDateTime dateOfBirth, Gender gender) {
+	    this.username = username;
+	    // TODO: Password hashin ?
+	    this.password = password;
+	    this.email = email;
+	    this.dateOfBirth = dateOfBirth;
+	    this.gender = gender;
 	}
 
 	public String getUsername() {
@@ -32,9 +38,9 @@ public class Account {
 	 * 
 	 * @param password
 	 */
-	public void isPassword(String password) {
-		// TODO - implement Account.isPassword
-		throw new UnsupportedOperationException();
+	public boolean isPassword(String password) {
+		// TODO - Hashing?
+		return password.equals(password);
 	}
 
 	/**
@@ -42,8 +48,7 @@ public class Account {
 	 * @param password
 	 */
 	public void updatePassword(String password) {
-		// TODO - implement Account.updatePassword
-		throw new UnsupportedOperationException();
+	    this.password = password;
 	}
 
 	public String getEmail() {

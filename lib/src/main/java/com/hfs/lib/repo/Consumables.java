@@ -24,4 +24,9 @@ public class Consumables {
 		throw new UnsupportedOperationException();
 	}
 
+	public void addConsumable(Consumable consumable) {
+		// TODO - implement Consumables.addConsumable
+		throw new UnsupportedOperationException();
+	}
+
 }

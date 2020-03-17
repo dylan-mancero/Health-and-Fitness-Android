@@ -2,32 +2,45 @@ package com.hfs.lib;
 
 
 import com.hfs.lib.activity.FinishedActivity;
+import com.hfs.lib.activity.Sport;
+import com.hfs.lib.activity.SportOccurrence;
+
+import java.util.LinkedList;
+import java.util.List;
 
 public class Fitness {
 
-	private double caloriesBurned;
+	private double caloriesBurned = 0;
+	private List<FinishedActivity> activities;
+
+	public Fitness() {
+		this.activities = new LinkedList<>();
+	}
 
 	/**
 	 * 
 	 * @param activity
 	 */
 	public void addActivitySession(FinishedActivity activity) {
-		// TODO - implement Fitness.addActivitySession
-		throw new UnsupportedOperationException();
+		if(activity == null){
+			throw new NullPointerException("Cannot add null FinishedActivity to Fitness.");
+		}
+
+		final double caloriesBurned = SportOccurrence.calculateCaloriesBurned(activity.getDuration(), (Sport) activity.getActivity());
+		if(caloriesBurned < 0){
+			throw new IllegalArgumentException("Cannot burn " + caloriesBurned + " calories.");
+		}
+		this.caloriesBurned += caloriesBurned;
+
+		this.activities.add(activity);
 	}
 
 	public FinishedActivity[] getActivitySessions() {
-		// TODO - implement Fitness.getActivitySessions
-		throw new UnsupportedOperationException();
+		return this.activities.toArray(new FinishedActivity[this.activities.size()]);
 	}
 
-	/**
-	 * 
-	 * @param FinishedActivity
-	 */
-	public void removeActivitySession(int FinishedActivity) {
-		// TODO - implement Fitness.removeActivitySession
-		throw new UnsupportedOperationException();
+	public void removeActivitySession(FinishedActivity activity) {
+	    this.activities.remove(activity);
 	}
 
 }
