@@ -14,6 +14,8 @@ import android.view.ViewGroup;
  */
 public class ActivityHistoryFragment extends Fragment {
 
+    private static final String TAG = "MainActivity";
+
     public ActivityHistoryFragment() {
         // Required empty public constructor
     }

@@ -4,31 +4,31 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentContainerView;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.view.View;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.FrameLayout;
 
 public class MainActivity extends AppCompatActivity {
-    private Button button1; //Button for setting future activities from homepage
-    private Button button2; //Button for adding food items from homepage
+    //private Button button1; //Button for setting future activities from homepage
+    //private Button button2; //Button for adding food items from homepage
 
     private BottomNavigationView mMainNav;
     private FrameLayout mMainFrame;
 
-    private HomeFragment homeFragment;
-    private FoodHistoryFragment foodHistoryFragment;
-    private ActivityHistoryFragment activityHistoryFragment;
+    private HomeFragment navHomeFragment;
+    private FoodHistoryFragment navFoodHistoryFragment;
+    private ActivityHistoryFragment navActivityHistoryFragment;
+
+    private FragmentContainerView fragmentContainer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,11 +38,14 @@ public class MainActivity extends AppCompatActivity {
         mMainFrame = (FrameLayout) findViewById(R.id.main_frame);
         mMainNav = (BottomNavigationView) findViewById(R.id.main_nav);
 
-        homeFragment = new HomeFragment();
-        foodHistoryFragment = new FoodHistoryFragment();
-        activityHistoryFragment = new ActivityHistoryFragment();
+        fragmentContainer = findViewById(R.id.fragment_container_view);
+        getSupportFragmentManager().beginTransaction().add(R.id.fragment_container_view, new HomeFragment());
 
-        setFragment(homeFragment);
+        navHomeFragment = new HomeFragment();
+        navFoodHistoryFragment = new FoodHistoryFragment();
+        navActivityHistoryFragment = new ActivityHistoryFragment();
+
+        setFragment(navHomeFragment);
 
         mMainNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -52,17 +55,17 @@ public class MainActivity extends AppCompatActivity {
 
                     case R.id.nav_home :
                         mMainNav.setItemBackgroundResource(R.color.colorPrimary);
-                        setFragment(homeFragment);
+                        setFragment(navHomeFragment);
                         return true;
 
                     case R.id.nav_foodHistory :
-                        mMainNav.setItemBackgroundResource(R.color.colorAccent);
-                        setFragment(foodHistoryFragment);
+                        mMainNav.setItemBackgroundResource(R.color.colorPrimary);
+                        setFragment(navFoodHistoryFragment);
                         return true;
 
                     case R.id.nav_activityHistory :
-                        mMainNav.setItemBackgroundResource(R.color.colorPrimaryDark);
-                        setFragment(activityHistoryFragment);
+                        mMainNav.setItemBackgroundResource(R.color.colorPrimary);
+                        setFragment(navActivityHistoryFragment);
                         return true;
 
                     default:
@@ -70,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-
+/*
         //Associating button1&2 with relevant button id's
         button1 = findViewById(R.id.setFutureActivity);
         button2 = findViewById(R.id.setFoodItem);
@@ -88,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
                 openSetFoodItem();
             }
         });
-
+*/
     }
 
     private void setFragment(Fragment fragment) {
