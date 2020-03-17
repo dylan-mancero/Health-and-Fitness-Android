@@ -4,6 +4,7 @@ public class ExerciseOccurrence extends ActivityOccurrence {
 
 	private final int sets;
 	private final int reps;
+	private final ActivityReport report;
 
 	/**
 	 *
@@ -18,6 +19,21 @@ public class ExerciseOccurrence extends ActivityOccurrence {
 		}
 		this.sets = sets;
 		this.reps = reps;
+
+		StringBuffer reportBuffer = new StringBuffer(finishedActivity.getActivity().getName() + " - Sets: " + sets + ", Reps: " + reps+ "\n");
+		reportBuffer.append("Duration: " + finishedActivity.getDuration().toString() + "\n");
+
+		int totReps = sets * reps;
+
+		if(totReps > 200){
+			reportBuffer.append("Amazing.");
+		} else if(totReps > 100) {
+			reportBuffer.append("Well done.");
+		} else {
+			reportBuffer.append("Keep it up.");
+		}
+
+		this.report = new ActivityReport(reportBuffer.toString());
 	}
 
 	public int getSets() {
@@ -29,8 +45,7 @@ public class ExerciseOccurrence extends ActivityOccurrence {
 	}
 
 	public ActivityReport getActivityReport() {
-		// TODO - implement ExerciseOccurrence.getActivityReport
-		throw new UnsupportedOperationException();
+	    return this.report;
 	}
 
 }

@@ -6,6 +6,7 @@ import java.time.temporal.ChronoUnit;
 public class SportOccurrence extends ActivityOccurrence {
 
 	private final double caloriesBurned;
+	private final ActivityReport report;
 
 	/**
 	 * 
@@ -23,6 +24,20 @@ public class SportOccurrence extends ActivityOccurrence {
 		}
 
 		this.caloriesBurned = calculateCaloriesBurned(finishedActivity.getDuration(), sport);
+
+		final StringBuffer reportBuffer = new StringBuffer();
+		reportBuffer.append(finishedActivity.getActivity().getName() + " - " + this.caloriesBurned + " kCal burned.\n");
+		reportBuffer.append("Duration: " + finishedActivity.getDuration().toString() + "\n");
+
+		if(this.caloriesBurned > 300.0){
+			reportBuffer.append("Amazing.");
+		} else if(this.caloriesBurned > 150.0){
+			reportBuffer.append("Well done.");
+		} else {
+			reportBuffer.append("Keep it up.");
+		}
+
+		this.report = new ActivityReport(reportBuffer.toString());
 	}
 
 	private static double calculateCaloriesBurned(Duration duration, Sport sport){
@@ -34,8 +49,7 @@ public class SportOccurrence extends ActivityOccurrence {
 	}
 
 	public ActivityReport getActivityReport() {
-		// TODO - implement SportOccurrence.getActivityReport
-		throw new UnsupportedOperationException();
+		return this.report;
 	}
 
 }

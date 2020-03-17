@@ -9,7 +9,6 @@ public class ActivityReport {
 	 * @param report
 	 */
 	public ActivityReport(String report) {
-		// TODO - implement ActivityReport.ActivityReport
         this.report = report;
 	}
 
