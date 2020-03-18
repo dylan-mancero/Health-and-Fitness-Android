@@ -4,11 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/registrationbg"
+    android:background="@drawable/loginbg"
     tools:context=".MainActivity">
 
     <ImageView
-        android:id="@+id/imageView4"
+        android:id="@+id/imageView2"
         android:layout_width="350dp"
         android:layout_height="400dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -19,14 +19,28 @@
         app:layout_constraintVertical_bias="0.32"
         app:srcCompat="@drawable/loginoverlay" />
 
+    <TextView
+        android:id="@+id/logintext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="login"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textColor="#4CAF50"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.24"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.229" />
+
     <EditText
         android:id="@+id/editText2"
         android:layout_width="250dp"
         android:layout_height="50dp"
-        android:background="@drawable/field_rounded_button"
+        android:background="@drawable/login_field_rounded_button"
         android:drawableRight="@drawable/email"
         android:ems="10"
-        android:hint=" e-mail"
+        android:hint="e-mail"
         android:inputType="textEmailAddress"
         android:paddingLeft="15dp"
         android:paddingRight="15dp"
@@ -41,7 +55,7 @@
         android:id="@+id/editText3"
         android:layout_width="250dp"
         android:layout_height="50dp"
-        android:background="@drawable/field_rounded_button"
+        android:background="@drawable/login_field_rounded_button"
         android:drawableRight="@drawable/password_foreground"
         android:ems="10"
         android:hint="password"
@@ -58,8 +72,8 @@
         android:id="@+id/button"
         android:layout_width="250dp"
         android:layout_height="50dp"
-        android:background="@drawable/rounded_button"
-        android:text="sign up"
+        android:background="@drawable/login_rounded_button"
+        android:text="sign in"
         android:textColor="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -72,25 +86,11 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/signin_prompt"
+        android:text="@string/signup_prompt"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button"
         app:layout_constraintVertical_bias="0.115" />
-
-    <TextView
-        android:id="@+id/registrationText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="registration"
-        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-        android:textColor="#03A9F4"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.34"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.229" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
