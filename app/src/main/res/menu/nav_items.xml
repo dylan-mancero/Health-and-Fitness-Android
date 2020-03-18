@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/nav_foodHistory"
+        android:icon="@drawable/outline_local_dining_black_24dp"
+        android:title="Food History"
+        android:visible="true" />
+    <item
+        android:id="@+id/nav_home"
+        android:icon="@drawable/outline_donut_large_black_24dp"
+        android:title="Home"
+        android:visible="true" />
+    <item
+        android:id="@+id/nav_activityHistory"
+        android:icon="@drawable/outline_directions_run_black_24dp"
+        android:title="Activity History"
+        android:visible="true" />
+</menu>
