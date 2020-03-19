@@ -8,9 +8,16 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.NumberPicker;
+import android.widget.Spinner;
+import android.widget.SpinnerAdapter;
 
 import com.google.firebase.auth.FirebaseAuth;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -65,6 +72,30 @@ public class HomeFragment extends Fragment {
                 startBtn.setEnabled(true);
             }
         });
+
+
+        final NumberPicker hhPicker = fragmentView.findViewById(R.id.hhPicker);
+        final NumberPicker mmPicker = fragmentView.findViewById(R.id.mmPicker);
+        final NumberPicker ssPicker = fragmentView.findViewById(R.id.ssPicker);
+        final NumberPicker[] pickers = {hhPicker, mmPicker, ssPicker};
+
+        for(NumberPicker picker : pickers){
+            picker.setMinValue(0);
+            picker.setMaxValue(59);
+        }
+        hhPicker.setMaxValue(5);
+
+        final Spinner activitySpinner = fragmentView.findViewById(R.id.activitySpinner);
+
+        final List<String> activities = new ArrayList<>();
+        activities.add("Running");
+        activities.add("Swimming");
+        activities.add("Cycling");
+        activities.add("Walking");
+
+        ArrayAdapter<String> activitiesAdapter = new ArrayAdapter<>(this.getContext(), android.R.layout.simple_spinner_dropdown_item, activities);
+        activitiesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        activitySpinner.setAdapter(activitiesAdapter);
 
         return fragmentView;
     }
