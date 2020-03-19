@@ -39,6 +39,33 @@ public class HomeFragment extends Fragment {
             }
         });
 
+        final Button startBtn = fragmentView.findViewById(R.id.startBtn);
+        final Button stopBtn = fragmentView.findViewById(R.id.stopBtn);
+
+        startBtn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                if(startBtn.getVisibility() == Button.VISIBLE) {
+                    startBtn.setVisibility(Button.INVISIBLE);
+                    startBtn.setEnabled(false);
+
+                    stopBtn.setVisibility(Button.VISIBLE);
+                    stopBtn.setEnabled(true);
+                }
+            }
+        });
+
+        stopBtn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                stopBtn.setVisibility(Button.INVISIBLE);
+                stopBtn.setEnabled(false);
+
+                startBtn.setVisibility(Button.VISIBLE);
+                startBtn.setEnabled(true);
+            }
+        });
+
         return fragmentView;
     }
 }
