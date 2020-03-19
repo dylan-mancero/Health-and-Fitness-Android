@@ -8,8 +8,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
+
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 
@@ -35,7 +39,7 @@ public class ActivityHistoryFragment extends Fragment {
         ListView list = (ListView) view.findViewById(R.id.activity_history_list);
         Log.d(TAG, "onCreateView: Started.");
 
-        ArrayList<String> activities = new ArrayList<>();
+        final ArrayList<String> activities = new ArrayList<>();
         activities.add("Cycling");
         activities.add("Running");
         activities.add("Jogging");
@@ -44,6 +48,15 @@ public class ActivityHistoryFragment extends Fragment {
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this.getContext(), android.R.layout.simple_list_item_1, activities);
         list.setAdapter(adapter);
+
+        //Below is a method to allow you to perform desired action once a list item is clicked on...
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Log.d(TAG, "onItemClick: name: " + activities.get(position));
+                //Toast.makeText(ActivityHistoryFragment.this, "You clicked on: " + activities.get(position), Toast.LENGTH_SHORT).show(); <--'xxxx.this' parameter does not work.
+            }
+        });
         return view;
     }
 }
