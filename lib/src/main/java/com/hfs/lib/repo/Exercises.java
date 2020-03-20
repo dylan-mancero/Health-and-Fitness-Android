@@ -2,21 +2,35 @@ package com.hfs.lib.repo;
 
 import com.hfs.lib.activity.Exercise;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
+
 public class Exercises {
 
-	private Exercises instance;
+	private static Exercises instance;
+	private List<Exercise> exercises;
 
 	private Exercises() {
-		// TODO - implement Exercises.Exercises
-		throw new UnsupportedOperationException();
+		// TODO - Change dummies to appropriate values from db.
+		// TODO - Possibly use a Set as no duplicate Exercise should be allowed.
+		final Exercise[] dummyExercises = new Exercise[]{
+				new Exercise("Push-ups"),
+				new Exercise("Sit-ups."),
+				new Exercise("Pull-ups"),
+				new Exercise("Plank")
+		};
+
+		this.exercises = new ArrayList<>(Arrays.asList(dummyExercises));
 	}
 
-	private Exercises getInstance() {
-		if(this.instance == null){
+	private static Exercises getInstance() {
+		if(instance == null){
 			instance = new Exercises();
 		}
 
-		return this.instance;
+		return instance;
 	}
 
 	/**
@@ -24,8 +38,12 @@ public class Exercises {
 	 * @param name
 	 */
 	public Exercise getExercise(String name) {
-		// TODO - implement Exercises.getExercise
-		throw new UnsupportedOperationException();
+		return this.exercises.parallelStream()
+				.filter(exercise -> exercise.getName().equals(name))
+				.findFirst().get();
 	}
 
+	public List<Exercise> getExercises() {
+		return new ArrayList<>(this.exercises);
+	}
 }
