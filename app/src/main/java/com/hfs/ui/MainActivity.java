@@ -9,8 +9,18 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentContainerView;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.viewpager.widget.PagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.hfs.ui.fragments.ActivityHistoryFragment;
+import com.hfs.ui.fragments.FoodHistoryFragment;
+import com.hfs.ui.fragments.HomeFragment;
+import com.hfs.ui.fragments.PageFragment1;
+import com.hfs.ui.fragments.PageFragment2;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     private BottomNavigationView mMainNav;
@@ -21,6 +31,9 @@ public class MainActivity extends AppCompatActivity {
     private ActivityHistoryFragment navActivityHistoryFragment;
 
     private FragmentContainerView fragmentContainer;
+
+    private ViewPager pager;
+    private PagerAdapter pagerAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +78,14 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
+        List<Fragment> list = new ArrayList<>();
+        list.add(new PageFragment1());
+        list.add(new PageFragment2());
+
+        pager = findViewById(R.id.pager);
+        pagerAdapter = new SlidePagerAdapter(getSupportFragmentManager(), list);
+        pager.setAdapter(pagerAdapter);
 
         /*
         TODO - Add logout button
