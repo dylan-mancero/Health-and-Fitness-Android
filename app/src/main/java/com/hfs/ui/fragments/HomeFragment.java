@@ -1,4 +1,4 @@
-package com.hfs.ui;
+package com.hfs.ui.fragments;
 
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -15,6 +15,8 @@ import android.widget.Spinner;
 import androidx.fragment.app.Fragment;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.hfs.ui.LoginActivity;
+import com.hfs.ui.R;
 
 import java.lang.ref.WeakReference;
 import java.time.Duration;

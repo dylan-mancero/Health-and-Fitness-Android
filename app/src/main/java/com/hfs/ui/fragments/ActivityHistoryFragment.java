@@ -1,4 +1,4 @@
-package com.hfs.ui;
+package com.hfs.ui.fragments;
 
 import android.os.Bundle;
 
@@ -14,6 +14,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.google.android.material.snackbar.Snackbar;
+import com.hfs.ui.R;
 
 import java.util.ArrayList;
 
