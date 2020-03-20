@@ -5,7 +5,6 @@ import com.hfs.lib.activity.Exercise;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 
 public class Exercises {
 
@@ -17,7 +16,7 @@ public class Exercises {
 		// TODO - Possibly use a Set as no duplicate Exercise should be allowed.
 		final Exercise[] dummyExercises = new Exercise[]{
 				new Exercise("Push-ups"),
-				new Exercise("Sit-ups."),
+				new Exercise("Sit-ups"),
 				new Exercise("Pull-ups"),
 				new Exercise("Plank")
 		};
@@ -25,7 +24,7 @@ public class Exercises {
 		this.exercises = new ArrayList<>(Arrays.asList(dummyExercises));
 	}
 
-	private static Exercises getInstance() {
+	public static Exercises getInstance() {
 		if(instance == null){
 			instance = new Exercises();
 		}

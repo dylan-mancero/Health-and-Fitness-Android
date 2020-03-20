@@ -15,6 +15,9 @@ import android.widget.Spinner;
 import androidx.fragment.app.Fragment;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.hfs.lib.activity.Activity;
+import com.hfs.lib.repo.Exercises;
+import com.hfs.lib.repo.Sports;
 import com.hfs.ui.LoginActivity;
 import com.hfs.ui.R;
 
@@ -24,6 +27,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 
 
 /**
@@ -65,13 +69,13 @@ public class HomeFragment extends Fragment {
 
         final Spinner activitySpinner = fragmentView.findViewById(R.id.activitySpinner);
 
-        final List<String> activities = new ArrayList<>();
-        activities.add("Running");
-        activities.add("Swimming");
-        activities.add("Cycling");
-        activities.add("Walking");
+        final List<Activity> activities = new ArrayList<>();
+        activities.addAll(Sports.getInstance().getSports());
+        activities.addAll(Exercises.getInstance().getExercises());
 
-        ArrayAdapter<String> activitiesAdapter = new ArrayAdapter<>(this.getContext(), android.R.layout.simple_spinner_dropdown_item, activities);
+        final List<String> activityNames = activities.stream().map(Activity::getName).collect(Collectors.toList());
+
+        ArrayAdapter<String> activitiesAdapter = new ArrayAdapter<>(this.getContext(), android.R.layout.simple_spinner_dropdown_item, activityNames);
         activitiesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         activitySpinner.setAdapter(activitiesAdapter);
 
