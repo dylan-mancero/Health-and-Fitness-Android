@@ -3,6 +3,7 @@ package com.hfs.ui.fragments;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,25 +16,33 @@ import android.widget.Spinner;
 import androidx.fragment.app.Fragment;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.hfs.lib.StandardProfile;
 import com.hfs.lib.activity.Activity;
-import com.hfs.lib.repo.Exercises;
-import com.hfs.lib.repo.Sports;
+import com.hfs.ui.HFSApplication;
 import com.hfs.ui.LoginActivity;
 import com.hfs.ui.R;
+import com.hfs.ui.di.DaggerHomeComponent;
 
 import java.lang.ref.WeakReference;
 import java.time.Duration;
 import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+
+import javax.inject.Inject;
+import javax.inject.Named;
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class HomeFragment extends Fragment {
+
+    private static final String TAG = "HomeFragment";
+    
+    @Inject @Named("activities") List<Activity> activities;
+    @Inject StandardProfile profile;
 
     private ProgressBar progressBar;
     private ActivityButton activityBtn;
@@ -48,6 +57,9 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View fragmentView = inflater.inflate(R.layout.fragment_home, container, false);
+
+        final HFSApplication app = (HFSApplication) getActivity().getApplication();
+        DaggerHomeComponent.builder().appComponent(app.getAppComponent()).build().inject(this);
 
         final Button logoutBtn = fragmentView.findViewById(R.id.logoutBtn);
         logoutBtn.setOnClickListener(v -> {
@@ -68,10 +80,6 @@ public class HomeFragment extends Fragment {
         hhPicker.setMaxValue(5);
 
         final Spinner activitySpinner = fragmentView.findViewById(R.id.activitySpinner);
-
-        final List<Activity> activities = new ArrayList<>();
-        activities.addAll(Sports.getInstance().getSports());
-        activities.addAll(Exercises.getInstance().getExercises());
 
         final List<String> activityNames = activities.stream().map(Activity::getName).collect(Collectors.toList());
 

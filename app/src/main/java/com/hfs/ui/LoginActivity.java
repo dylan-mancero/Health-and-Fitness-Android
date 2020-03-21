@@ -16,6 +16,13 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.hfs.lib.Fitness;
+import com.hfs.lib.Schedule;
+import com.hfs.lib.StandardProfile;
+import com.hfs.lib.nutrition.Nutrition;
+import com.hfs.lib.repo.Consumables;
+import com.hfs.lib.repo.Exercises;
+import com.hfs.lib.repo.Sports;
 
 public class LoginActivity extends AppCompatActivity {
     EditText emailId, password;
@@ -40,6 +47,8 @@ public class LoginActivity extends AppCompatActivity {
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser mFirebaseUser = mFirebaseAuth.getCurrentUser();
                 if( mFirebaseUser != null ){
+                    final StandardProfile profile = new StandardProfile(new Nutrition(0,0,0,0,null),new Schedule(), new Fitness(), Sports.getInstance(), Exercises.getInstance(), Consumables.getInstance());
+                    ((HFSApplication) getApplication()).initStandardProfile(profile);
                     Toast.makeText(LoginActivity.this,"You are logged in",Toast.LENGTH_SHORT).show();
                     Intent i = new Intent(LoginActivity.this, MainActivity.class);
                     startActivity(i);
@@ -74,6 +83,8 @@ public class LoginActivity extends AppCompatActivity {
                                 Toast.makeText(LoginActivity.this,"Login Error, Please Login Again",Toast.LENGTH_SHORT).show();
                             }
                             else{
+                                final StandardProfile profile = new StandardProfile(new Nutrition(0,0,0,0,null),new Schedule(), new Fitness(), Sports.getInstance(), Exercises.getInstance(), Consumables.getInstance());
+                                ((HFSApplication) getApplication()).initStandardProfile(profile);
                                 Intent intToHome = new Intent(LoginActivity.this,MainActivity.class);
                                 startActivity(intToHome);
                             }
