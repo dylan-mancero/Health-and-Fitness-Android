@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.hfs.ui">
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.hfs.ui"
+    tools:ignore="ExtraText">
+
+    //Allows the 'glide' library to make request to the internet and retrieve images
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:name=".HFSApplication"
@@ -10,7 +15,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".RegistrationActivity"></activity>
+        <activity android:name=".RegistrationActivity" />
         <activity android:name=".LoginActivity">
         <intent-filter>
             <action android:name="android.intent.action.MAIN" />
