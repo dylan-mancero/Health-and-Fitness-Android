@@ -13,9 +13,9 @@ import com.hfs.ui.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class AddFoodItem extends Fragment {
+public class AddFutureActivityFragment extends Fragment {
 
-    public AddFoodItem() {
+    public AddFutureActivityFragment() {
         // Required empty public constructor
     }
 
@@ -24,6 +24,6 @@ public class AddFoodItem extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_add_food_item, container, false);
+        return inflater.inflate(R.layout.fragment_add_future_activity, container, false);
     }
 }

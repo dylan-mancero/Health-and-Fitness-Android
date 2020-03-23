@@ -2,7 +2,6 @@ package com.hfs.ui;
 
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
@@ -16,8 +15,8 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.hfs.ui.fragments.ActivityHistoryFragment;
-import com.hfs.ui.fragments.AddFoodItem;
-import com.hfs.ui.fragments.AddFutureActivity;
+import com.hfs.ui.fragments.AddFoodItemFragment;
+import com.hfs.ui.fragments.AddFutureActivityFragment;
 import com.hfs.ui.fragments.FoodHistoryFragment;
 import com.hfs.ui.fragments.HomeFragment;
 
@@ -58,9 +57,9 @@ public class MainActivity extends AppCompatActivity {
 
         List<Fragment> list = new ArrayList<>();
         //Position of where the fragment is added might affect which fragment shows on slide first...???
-        list.add(new AddFutureActivity());
+        list.add(new AddFutureActivityFragment());
         list.add(new HomeFragment());
-        list.add(new AddFoodItem());
+        list.add(new AddFoodItemFragment());
 
         pager = findViewById(R.id.pager);
         pagerAdapter = new SlidePagerAdapter(getSupportFragmentManager(), list);
