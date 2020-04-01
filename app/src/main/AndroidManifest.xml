@@ -4,7 +4,7 @@
     package="com.hfs.ui"
     tools:ignore="ExtraText">
 
-    //Allows the 'glide' library to make request to the internet and retrieve images
+
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
