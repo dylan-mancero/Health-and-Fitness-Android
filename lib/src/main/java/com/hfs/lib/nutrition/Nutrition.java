@@ -1,5 +1,6 @@
 package com.hfs.lib.nutrition;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -10,7 +11,7 @@ public class Nutrition {
 	private double calories;
 	private double sugar;
 
-	private List<ConsumableOccurance> consumables;
+	private List<ConsumableOccurance> consumables = new ArrayList<>();
 	private final Allergy[] allergies;
 
 	public Nutrition(double protein, double carbs, double calories, double sugar, Allergy[] allergies) {
@@ -31,12 +32,14 @@ public class Nutrition {
 			throw new IllegalArgumentException(consumable.getName() + " consumed cannot be: " + amount + " g\nExpected more than 0g.");
 		}
 
-		final List<Allergy> userAllergies = Arrays.asList(this.allergies);
-		final boolean itemContainsAllergies = Arrays.stream(consumable.getAllergies())
-				.anyMatch(userAllergies::contains);
+		if(this.allergies != null){
+			final List<Allergy> userAllergies = Arrays.asList(this.allergies);
+			final boolean itemContainsAllergies = Arrays.stream(consumable.getAllergies())
+					.anyMatch(userAllergies::contains);
 
-		if(itemContainsAllergies){
-			throw new IllegalArgumentException(consumable.getName() + " contains one or many allergen to which the user is allergic.");
+			if(itemContainsAllergies) {
+				throw new IllegalArgumentException(consumable.getName() + " contains one or many allergen to which the user is allergic.");
+			}
 		}
 
 		final ConsumableOccurance consumedItem = new ConsumableOccurance(consumable, amount);
