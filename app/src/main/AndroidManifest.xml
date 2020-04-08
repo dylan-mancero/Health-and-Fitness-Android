@@ -3,10 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.hfs.ui"
     tools:ignore="ExtraText">
-
-
     <uses-permission android:name="android.permission.INTERNET" />
-
     <application
         android:name=".HFSApplication"
         android:allowBackup="true"

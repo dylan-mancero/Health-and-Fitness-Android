@@ -1,5 +1,6 @@
 package com.hfs.ui;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
@@ -23,7 +24,7 @@ import com.hfs.ui.fragments.HomeFragment;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements AddFutureActivityFragment.OnFragmentInteractionListener{
     private BottomNavigationView mMainNav;
     private FrameLayout mMainFrame;
     private LinearLayout mMainPageSlider;
@@ -38,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
     private PagerAdapter pagerAdapter;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate (Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
@@ -103,4 +104,7 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.commit();
     }
 
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+    }
 }
