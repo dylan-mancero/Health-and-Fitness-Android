@@ -4,7 +4,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -63,6 +62,9 @@ public class HomeFragment extends Fragment {
 
         final HFSApplication app = (HFSApplication) getActivity().getApplication();
         DaggerHomeComponent.builder().appComponent(app.getAppComponent()).build().inject(this);
+
+        final Button goalBtn = fragmentView.findViewById(R.id.goalBtn);
+        goalBtn.setText(profile.getGoal().name());
 
         final Button logoutBtn = fragmentView.findViewById(R.id.logoutBtn);
         logoutBtn.setOnClickListener(v -> {

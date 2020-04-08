@@ -35,6 +35,8 @@ public class ActivityHistoryFragment extends Fragment {
     private ArrayList<String> mDates = new ArrayList<>();   //Do not know how to implement this variable in the code.
     private ArrayList<String> mImageURLs = new ArrayList<>();
 
+
+
     private View fragment;
 
     public ActivityHistoryFragment() {
