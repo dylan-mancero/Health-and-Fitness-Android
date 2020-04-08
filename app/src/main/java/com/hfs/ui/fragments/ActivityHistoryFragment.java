@@ -17,10 +17,16 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.google.android.material.snackbar.Snackbar;
+import com.hfs.lib.StandardProfile;
+import com.hfs.ui.HFSApplication;
 import com.hfs.ui.R;
 import com.hfs.ui.RecyclerViewAdapter;
+import com.hfs.ui.di.DaggerAppComponent;
+import com.hfs.ui.di.DaggerProfileComponent;
 
 import java.util.ArrayList;
+
+import javax.inject.Inject;
 
 
 /**
@@ -35,7 +41,7 @@ public class ActivityHistoryFragment extends Fragment {
     private ArrayList<String> mDates = new ArrayList<>();   //Do not know how to implement this variable in the code.
     private ArrayList<String> mImageURLs = new ArrayList<>();
 
-
+    @Inject StandardProfile profile;
 
     private View fragment;
 
@@ -49,10 +55,16 @@ public class ActivityHistoryFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_activity_history, container, false);
+
+        // Injecting StandardProfile.
+        final HFSApplication app = (HFSApplication) getActivity().getApplication();
+        DaggerProfileComponent.builder().appComponent(app.getAppComponent()).build().inject(this);
+
         fragment = view;
         Log.d(TAG, "onCreateView: started.");
         initImageBitmaps();
         initRecyclerView();
+
 
         return view;
     }

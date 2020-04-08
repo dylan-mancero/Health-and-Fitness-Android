@@ -34,11 +34,4 @@ public class HFSApplication extends Application {
         return appComponent;
     }
 
-    public StandardProfile getStandardProfile(){
-        if(appComponent == null){
-            throw new NullPointerException("AppComponent not initialised.\nCall initStandardProfile first.\nStandardProfile not set.");
-        }
-
-        return appComponent.standardProfile();
-    }
 }
