@@ -1,5 +1,6 @@
 package com.hfs.ui.fragments;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -38,7 +39,7 @@ import javax.inject.Named;
  * A simple {@link Fragment} subclass.
  */
 public class HomeFragment extends Fragment {
-
+    Button selectDateBtn;
     private static final String TAG = "HomeFragment";
     
     @Inject @Named("activities") List<Activity> activities;
@@ -55,6 +56,8 @@ public class HomeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+
         // Inflate the layout for this fragment
         View fragmentView = inflater.inflate(R.layout.fragment_home, container, false);
 
