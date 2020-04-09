@@ -5,7 +5,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -14,10 +13,16 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.hfs.ui.fragments.ActivityHistoryFragment;
+import com.hfs.lib.StandardProfile;
+import com.hfs.lib.activity.FinishedActivity;
+import com.hfs.lib.activity.UnfinishedActivity;
+import com.hfs.lib.repo.Sports;
+import com.hfs.ui.viewmodels.ActivityHistoryViewModel;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
+import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
+import java.util.List;
+import java.util.Random;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -25,16 +30,18 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     private static final String TAG = "RecyclerViewAdapter";
 
-    private ArrayList<String> mImageNames = new ArrayList<>();
-    private ArrayList<String> mImages = new ArrayList<>();
-    private ArrayList<String> mImageDates = new ArrayList<>();
-    private Context mContext;
+    private List<FinishedActivity> activities;
+    final private Context context;
 
-    public RecyclerViewAdapter(Context context, ArrayList<String> imageNames, ArrayList<String> imageDates, ArrayList<String> images){
-        mImageNames = imageNames;
-        mImageDates = imageDates;
-        mImages = images;
-        mContext = context;
+    // TODO: Remove, only used for the addActivity simulation
+    final ActivityHistoryViewModel viewModel;
+
+    public RecyclerViewAdapter(Context context, List<FinishedActivity> activities, ActivityHistoryViewModel viewModel){
+        this.activities = activities;
+        this.context = context;
+
+        // TODO: Remove, only used for the addActivity simulation
+        this.viewModel = viewModel;
     }
 
     @NonNull
@@ -50,23 +57,46 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Log.d(TAG, "onBindViewHolder: called.");
 
-        Glide.with(mContext)
+        final FinishedActivity finishedActivity = activities.get(position);
+
+        // TODO: Add images.
+        /*
+        Glide.with(context)
                 .asBitmap()
                 .load(mImages.get(position))
                 .into(holder.image);
+        */
 
-        holder.imageName.setText(mImageNames.get(position));
+        holder.name.setText(finishedActivity.getActivity().getName());
+
+        // Shows start times of each activity.
+        holder.date.setText(finishedActivity.getStart().toString());
 
         //On click listener for the items on list...
         holder.parentLayout.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View view) {
-               Log.d(TAG, "onClick: clicked on: " + mImageNames.get(position));
+               final Random rand = new Random();
+               Log.d(TAG, "onClick: clicked on: " + finishedActivity.toString());
+
+               // TODO: Remove. - addActivity simulation.
+               // Simulating additions of activities.
+               final UnfinishedActivity dummyUnfinishedActivity = new UnfinishedActivity(
+                       Sports.getInstance().getSport("Running"),
+                       OffsetDateTime.of(2019,
+                               rand.nextInt(12) + 1,
+                               rand.nextInt(20) + 1,
+                               rand.nextInt(24),
+                               rand.nextInt(60),
+                               0, 0, ZoneOffset.UTC));
+               final FinishedActivity dummyFinishedActivity = dummyUnfinishedActivity.end();
+               viewModel.addActivity(dummyFinishedActivity);
+               notifyDataSetChanged();
 
                //===============================================================================
                //CODE HERE WHAT YOU WOULD LIKE THE APP TO DO ON CLICK OF THE SPECIFIC ACTIVITY_HISTORY ITEM.
                //===============================================================================
-               Toast.makeText(mContext, mImageNames.get(position), Toast.LENGTH_SHORT).show();
+               Toast.makeText(context, finishedActivity.toString(), Toast.LENGTH_SHORT).show();
            }
         });
     }
@@ -74,23 +104,28 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     //Method to inform the adapter--> How many list items are in your list..., If 'return 0', would not display anything on screen at run-time...
     @Override
     public int getItemCount() {
-        return mImageNames.size();
+        return activities.size();
+    }
+
+    public void setActivities(List<FinishedActivity> activities){
+        this.activities = activities;
+        notifyDataSetChanged();
     }
 
     //Declare widgets in here, as takes care of each individual list item.
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    protected class ViewHolder extends RecyclerView.ViewHolder{
 
         CircleImageView image;
-        TextView imageName;
-        TextView imageDate;
+        TextView name;
+        TextView date;
         RelativeLayout parentLayout;
 
         //Connecting elements of layout_listitem.xml to the ViewHolder, so it can update correctly.
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             image = itemView.findViewById(R.id.image);
-            imageName = itemView.findViewById(R.id.image_name);
-            imageDate = itemView.findViewById(R.id.image_date);
+            name = itemView.findViewById(R.id.image_name);
+            date = itemView.findViewById(R.id.image_date);
             parentLayout = itemView.findViewById(R.id.parent_layout);
 
         }

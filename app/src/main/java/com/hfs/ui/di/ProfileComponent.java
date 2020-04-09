@@ -1,6 +1,7 @@
 package com.hfs.ui.di;
 
 import com.hfs.ui.fragments.ActivityHistoryFragment;
+import com.hfs.ui.viewmodels.ActivityHistoryViewModel;
 
 import dagger.Component;
 
@@ -8,7 +9,7 @@ import dagger.Component;
 @Component(dependencies = AppComponent.class)
 public interface ProfileComponent {
 
-    void inject(ActivityHistoryFragment activityHistoryFragment);
+    void inject(ActivityHistoryViewModel activityHistoryViewModel);
 
     @Component.Builder
     interface Builder{

@@ -11,6 +11,7 @@ import com.hfs.lib.repo.Consumables;
 import com.hfs.lib.nutrition.Nutrition;
 
 import java.time.OffsetDateTime;
+import java.util.List;
 
 public class StandardProfile {
 
@@ -68,7 +69,7 @@ public class StandardProfile {
 		this.schedule.removeActivitySession(activity);
 	}
 
-	public FinishedActivity[] getPastActivitySessions() {
+	public List<FinishedActivity> getPastActivitySessions() {
 	    return this.fitness.getActivitySessions();
 	}
 

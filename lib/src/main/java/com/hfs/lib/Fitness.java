@@ -35,8 +35,8 @@ public class Fitness {
 		this.activities.add(activity);
 	}
 
-	public FinishedActivity[] getActivitySessions() {
-		return this.activities.toArray(new FinishedActivity[this.activities.size()]);
+	public List<FinishedActivity> getActivitySessions() {
+		return this.activities;
 	}
 
 	public void removeActivitySession(FinishedActivity activity) {
