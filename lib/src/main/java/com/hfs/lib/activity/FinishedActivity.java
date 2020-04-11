@@ -28,7 +28,7 @@ public class FinishedActivity implements ReportableStrategy {
 	 */
 	public FinishedActivity(UnfinishedActivity unfinishedActivity, OffsetDateTime endTime) throws DateTimeException{
 		final OffsetDateTime start = unfinishedActivity.getStart();
-		if(endTime.isAfter(start)){
+		if(start.isAfter(endTime)){
 			throw new DateTimeException("Provided end time is invalid.\nStart time: " + start.toString() + "\tEnd time: " + endTime.toString());
 		}
 		this.duration = Duration.between(start, endTime);

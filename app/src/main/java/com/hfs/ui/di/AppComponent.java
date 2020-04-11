@@ -4,7 +4,6 @@ import com.hfs.lib.StandardProfile;
 
 import javax.inject.Singleton;
 
-import dagger.BindsInstance;
 import dagger.Component;
 
 @Singleton
@@ -18,6 +17,6 @@ public interface AppComponent {
         Builder profileModule(ProfileModule profileModule);
 
         AppComponent build();
-    };
+    }
 
 }

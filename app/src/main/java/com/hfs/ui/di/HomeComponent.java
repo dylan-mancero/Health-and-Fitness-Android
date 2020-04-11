@@ -2,7 +2,6 @@ package com.hfs.ui.di;
 
 import com.hfs.ui.fragments.HomeFragment;
 
-import dagger.BindsInstance;
 import dagger.Component;
 
 @PerUser

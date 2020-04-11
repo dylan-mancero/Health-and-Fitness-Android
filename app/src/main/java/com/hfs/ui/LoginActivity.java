@@ -17,12 +17,18 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.hfs.lib.Fitness;
+import com.hfs.lib.Goal;
 import com.hfs.lib.Schedule;
 import com.hfs.lib.StandardProfile;
+import com.hfs.lib.activity.FinishedActivity;
+import com.hfs.lib.activity.UnfinishedActivity;
 import com.hfs.lib.nutrition.Nutrition;
 import com.hfs.lib.repo.Consumables;
 import com.hfs.lib.repo.Exercises;
 import com.hfs.lib.repo.Sports;
+
+import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
 
 public class LoginActivity extends AppCompatActivity {
     EditText emailId, password;
@@ -47,8 +53,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser mFirebaseUser = mFirebaseAuth.getCurrentUser();
                 if( mFirebaseUser != null ){
-                    final StandardProfile profile = new StandardProfile(new Nutrition(0,0,0,0,null),new Schedule(), new Fitness(), Sports.getInstance(), Exercises.getInstance(), Consumables.getInstance());
-                    ((HFSApplication) getApplication()).initStandardProfile(profile);
+                    initialiseStandardProfile();
                     Toast.makeText(LoginActivity.this,"You are logged in",Toast.LENGTH_SHORT).show();
                     Intent i = new Intent(LoginActivity.this, MainActivity.class);
                     startActivity(i);
@@ -83,8 +88,7 @@ public class LoginActivity extends AppCompatActivity {
                                 Toast.makeText(LoginActivity.this,"Login Error, Please Login Again",Toast.LENGTH_SHORT).show();
                             }
                             else{
-                                final StandardProfile profile = new StandardProfile(new Nutrition(0,0,0,0,null),new Schedule(), new Fitness(), Sports.getInstance(), Exercises.getInstance(), Consumables.getInstance());
-                                ((HFSApplication) getApplication()).initStandardProfile(profile);
+                                initialiseStandardProfile();
                                 Intent intToHome = new Intent(LoginActivity.this,MainActivity.class);
                                 startActivity(intToHome);
                             }
@@ -106,6 +110,29 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(intSignUp);
             }
         });
+    }
+
+    private void initialiseStandardProfile(){
+        // TODO: Remove dummy values;
+        final Nutrition nutrition = new Nutrition(100,101,102, 103, null);
+        final Schedule schedule = new Schedule();
+        final Fitness fitness = new Fitness();
+
+        final StandardProfile profile = new StandardProfile(nutrition, schedule, fitness);
+
+        profile.setGoal(Goal.GAIN_MUSCLE_MASS);
+
+        // TODO: Inject repo instead of getInstance()
+        final UnfinishedActivity dummyUnfinishedActivity = new UnfinishedActivity(
+                Sports.getInstance().getSport("Running"),
+                OffsetDateTime.of(2020, 1, 1, 10, 10, 10, 0, ZoneOffset.UTC));
+        final FinishedActivity dummyFinishedActivity = dummyUnfinishedActivity.end();
+
+        profile.addPastActivitySession(dummyFinishedActivity);
+        profile.consume(Consumables.getInstance().getConsumable("Pasta"), 100);
+
+        ((HFSApplication) getApplication()).initStandardProfile(profile);
+
     }
 
     @Override

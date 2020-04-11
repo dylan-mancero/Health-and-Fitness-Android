@@ -11,6 +11,7 @@ import com.hfs.lib.repo.Consumables;
 import com.hfs.lib.nutrition.Nutrition;
 
 import java.time.OffsetDateTime;
+import java.util.List;
 
 public class StandardProfile {
 
@@ -22,28 +23,17 @@ public class StandardProfile {
 	private Nutrition nutrition;
 	private Schedule schedule;
 	private Fitness fitness;
-	private Sports sports;
-	private Exercises exercise;
-	private Consumables consumable;
 
 	/**
 	 * 
 	 * @param nutrition
 	 * @param schedule
 	 * @param fitness
-	 * @param sports
-	 * @param exercises
-	 * @param consumables
 	 */
-	public StandardProfile(Nutrition nutrition, Schedule schedule, Fitness fitness, Sports sports, Exercises exercises, Consumables consumables) {
+	public StandardProfile(Nutrition nutrition, Schedule schedule, Fitness fitness) {
 	    this.nutrition = nutrition;
 	    this.schedule = schedule;
 	    this.fitness = fitness;
-
-	    // Repositories.
-	    this.sports = sports;
-	    this.exercise = exercises;
-	    this.consumable = consumables;
 	}
 
 	public int getSharablePin() {
@@ -79,7 +69,7 @@ public class StandardProfile {
 		this.schedule.removeActivitySession(activity);
 	}
 
-	public FinishedActivity[] getPastActivitySessions() {
+	public List<FinishedActivity> getPastActivitySessions() {
 	    return this.fitness.getActivitySessions();
 	}
 
@@ -109,10 +99,6 @@ public class StandardProfile {
 
 	public void consume(Consumable consumable, double amount) {
 	    this.nutrition.addConsumable(consumable, amount);
-	}
-
-	public void addNewConsumable(Consumable consumable) {
-	    this.consumable.addConsumable(consumable);
 	}
 
 	public Goal getGoal() {

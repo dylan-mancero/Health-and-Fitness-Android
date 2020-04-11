@@ -11,7 +11,7 @@
     <!-- TODO: Update blank fragment layout -->
 
     <Button
-        android:id="@+id/setGoal"
+        android:id="@+id/goalBtn"
         android:layout_width="88dp"
         android:layout_height="39dp"
         android:layout_marginTop="32dp"

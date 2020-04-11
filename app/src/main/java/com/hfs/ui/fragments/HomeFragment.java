@@ -62,6 +62,9 @@ public class HomeFragment extends Fragment {
         final HFSApplication app = (HFSApplication) getActivity().getApplication();
         DaggerHomeComponent.builder().appComponent(app.getAppComponent()).build().inject(this);
 
+        final Button goalBtn = fragmentView.findViewById(R.id.goalBtn);
+        goalBtn.setText(profile.getGoal().name());
+
         final Button logoutBtn = fragmentView.findViewById(R.id.logoutBtn);
         logoutBtn.setOnClickListener(v -> {
             FirebaseAuth.getInstance().signOut();

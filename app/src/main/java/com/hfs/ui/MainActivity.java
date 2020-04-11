@@ -96,19 +96,6 @@ public class MainActivity extends AppCompatActivity implements AddFutureActivity
                 }
             }
         });
-
-        /*
-        TODO - Add logout button
-        btnLogout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FirebaseAuth.getInstance().signOut();
-                Intent intToLogin = new Intent(HomeActivity.this, LoginActivity.class);
-                startActivity(intToLogin);
-            }
-        });
-        * */
-
     }
 
     private void setFragment(Fragment fragment) {
