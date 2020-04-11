@@ -1,10 +1,8 @@
 package com.hfs.ui.fragments;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,13 +43,13 @@ public class HomeFragment extends Fragment {
     @Inject @Named("activities") List<Activity> activities;
     @Inject StandardProfile profile;
 
+
     private ProgressBar progressBar;
     private ActivityButton activityBtn;
 
     public HomeFragment() {
         // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -83,7 +81,6 @@ public class HomeFragment extends Fragment {
         hhPicker.setMaxValue(5);
 
         final Spinner activitySpinner = fragmentView.findViewById(R.id.activitySpinner);
-
         final List<String> activityNames = activities.stream().map(Activity::getName).collect(Collectors.toList());
 
         ArrayAdapter<String> activitiesAdapter = new ArrayAdapter<>(this.getContext(), android.R.layout.simple_spinner_dropdown_item, activityNames);

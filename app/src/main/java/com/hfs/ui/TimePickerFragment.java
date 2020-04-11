@@ -29,7 +29,6 @@ public class TimePickerFragment extends AppCompatDialogFragment implements TimeP
         final Calendar c = Calendar.getInstance();
         int hour = c.get(Calendar.HOUR_OF_DAY);
         int minute = c.get(Calendar.MINUTE);
-        int day = c.get(Calendar.DAY_OF_MONTH);
 
         // Return a new instance of DatePickerDialog
         return new TimePickerDialog(getActivity(), this, hour, minute,
@@ -40,7 +39,7 @@ public class TimePickerFragment extends AppCompatDialogFragment implements TimeP
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
         c.set(Calendar.HOUR_OF_DAY, hourOfDay);
         c.set(Calendar.MINUTE, minute);
-        String selectedTime = new SimpleDateFormat("hh:mm", Locale.ENGLISH).format(c.getTime());
+        String selectedTime = new SimpleDateFormat("HH:mm", Locale.ENGLISH).format(c.getTime());
 
         Log.d(TAG, "onTimeSet: " + selectedTime);
         // send date back to the target fragment
