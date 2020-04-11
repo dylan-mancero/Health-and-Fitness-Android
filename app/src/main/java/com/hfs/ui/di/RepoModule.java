@@ -1,41 +1,53 @@
 package com.hfs.ui.di;
 
 import com.hfs.lib.activity.Activity;
+import com.hfs.lib.repo.Activities;
 import com.hfs.lib.repo.Consumables;
-import com.hfs.lib.repo.Exercises;
-import com.hfs.lib.repo.Sports;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Named;
+import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
 
 @Module
-public abstract class RepoModule {
+public class RepoModule {
 
-    @Provides
-    static Exercises provideExercises(){
-        return Exercises.getInstance();
+    private static RepoModule instance;
+
+    private final Activities activities;
+
+    private RepoModule(Activities activities) {
+        this.activities = activities;
     }
 
-    @Provides
-    static Sports provideSports(){
-        return Sports.getInstance();
+    public static RepoModule getInstance(Activities activities) {
+        if(instance == null) {
+            instance = new RepoModule(activities);
+        }
+
+        return instance;
     }
 
+    @Singleton
+    @Provides
+    Activities provideActivities(){
+        return this.activities;
+    }
+
+    @Singleton
+    @Provides
+    @Named("activities")
+    List<Activity> getActivities(Activities activities){
+        return activities.getActivities();
+    }
+
+    @Singleton
     @Provides
     static Consumables provideConsumables(){
         return Consumables.getInstance();
     }
-
-    @Provides @Named("activities")
-    static List<Activity> activities(Sports sports, Exercises exercises){
-        final List<Activity> activities = new ArrayList<>();
-        activities.addAll(sports.getSports());
-        activities.addAll(exercises.getExercises());
-        return activities;
-    }
 }
+

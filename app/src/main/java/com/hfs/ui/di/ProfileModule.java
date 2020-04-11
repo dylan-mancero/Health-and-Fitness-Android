@@ -2,7 +2,6 @@ package com.hfs.ui.di;
 
 import com.hfs.lib.StandardProfile;
 
-import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import dagger.Module;
@@ -15,7 +14,7 @@ public class ProfileModule {
 
     private StandardProfile standardProfile;
 
-    public ProfileModule(StandardProfile standardProfile) {
+    private ProfileModule(StandardProfile standardProfile) {
         this.standardProfile = standardProfile;
     }
 

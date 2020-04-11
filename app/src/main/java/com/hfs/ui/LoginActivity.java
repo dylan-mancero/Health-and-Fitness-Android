@@ -1,34 +1,21 @@
 package com.hfs.ui;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import android.os.Bundle;
-
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.hfs.lib.Fitness;
-import com.hfs.lib.Goal;
-import com.hfs.lib.Schedule;
-import com.hfs.lib.StandardProfile;
-import com.hfs.lib.activity.FinishedActivity;
-import com.hfs.lib.activity.UnfinishedActivity;
-import com.hfs.lib.nutrition.Nutrition;
-import com.hfs.lib.repo.Consumables;
-import com.hfs.lib.repo.Exercises;
-import com.hfs.lib.repo.Sports;
-
-import java.time.OffsetDateTime;
-import java.time.ZoneOffset;
 
 public class LoginActivity extends AppCompatActivity {
     EditText emailId, password;
@@ -113,26 +100,8 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void initialiseStandardProfile(){
-        // TODO: Remove dummy values;
-        final Nutrition nutrition = new Nutrition(100,101,102, 103, null);
-        final Schedule schedule = new Schedule();
-        final Fitness fitness = new Fitness();
-
-        final StandardProfile profile = new StandardProfile(nutrition, schedule, fitness);
-
-        profile.setGoal(Goal.GAIN_MUSCLE_MASS);
-
-        // TODO: Inject repo instead of getInstance()
-        final UnfinishedActivity dummyUnfinishedActivity = new UnfinishedActivity(
-                Sports.getInstance().getSport("Running"),
-                OffsetDateTime.of(2020, 1, 1, 10, 10, 10, 0, ZoneOffset.UTC));
-        final FinishedActivity dummyFinishedActivity = dummyUnfinishedActivity.end();
-
-        profile.addPastActivitySession(dummyFinishedActivity);
-        profile.consume(Consumables.getInstance().getConsumable("Pasta"), 100);
-
-        ((HFSApplication) getApplication()).initStandardProfile(profile);
-
+        // TODO: Initialise properly.
+        ((HFSApplication) getApplication()).initStandardProfile(null);
     }
 
     @Override

@@ -1,5 +1,8 @@
 package com.hfs.lib.activity;
 
+import androidx.room.Entity;
+
+@Entity
 public class Sport extends Activity {
 
 	private final double calorieMultiplier;

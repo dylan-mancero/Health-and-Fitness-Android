@@ -1,6 +1,10 @@
 package com.hfs.ui.fragments;
 
 import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LiveData;
@@ -8,28 +12,11 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.webkit.WebViewFragment;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-import android.widget.Toast;
-
-import com.google.android.material.snackbar.Snackbar;
-import com.hfs.lib.StandardProfile;
-import com.hfs.lib.activity.Activity;
 import com.hfs.lib.activity.FinishedActivity;
-import com.hfs.ui.HFSApplication;
 import com.hfs.ui.R;
 import com.hfs.ui.RecyclerViewAdapter;
-import com.hfs.ui.di.DaggerAppComponent;
-import com.hfs.ui.di.DaggerProfileComponent;
 import com.hfs.ui.viewmodels.ActivityHistoryViewModel;
 
-import java.util.ArrayList;
 import java.util.List;
 
 

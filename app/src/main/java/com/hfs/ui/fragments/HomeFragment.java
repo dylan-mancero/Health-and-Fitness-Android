@@ -20,7 +20,7 @@ import com.hfs.lib.activity.Activity;
 import com.hfs.ui.HFSApplication;
 import com.hfs.ui.LoginActivity;
 import com.hfs.ui.R;
-import com.hfs.ui.di.DaggerHomeComponent;
+import com.hfs.ui.di.DaggerAppComponent;
 
 import java.lang.ref.WeakReference;
 import java.time.Duration;
@@ -60,10 +60,11 @@ public class HomeFragment extends Fragment {
         View fragmentView = inflater.inflate(R.layout.fragment_home, container, false);
 
         final HFSApplication app = (HFSApplication) getActivity().getApplication();
-        DaggerHomeComponent.builder().appComponent(app.getAppComponent()).build().inject(this);
+        this.activities = app.getAppComponent().activities().getActivities();
 
+        // TODO: Set goal button text.
         final Button goalBtn = fragmentView.findViewById(R.id.goalBtn);
-        goalBtn.setText(profile.getGoal().name());
+        //goalBtn.setText(profile.getGoal().name());
 
         final Button logoutBtn = fragmentView.findViewById(R.id.logoutBtn);
         logoutBtn.setOnClickListener(v -> {
