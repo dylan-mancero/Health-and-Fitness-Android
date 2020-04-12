@@ -9,6 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import com.hfs.ui.R;
 
@@ -28,10 +30,15 @@ public class AddFoodItemFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_add_food_item, container, false);
 
         Button confirm = (Button) view.findViewById(R.id.BtnConfirmAddFood);
+        EditText amount = (EditText) view.findViewById(R.id.editTextAmount);
+        TextView food = (TextView)view.findViewById(R.id.FoodTextView);
+
         confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 FoodHistoryFragment frag = new FoodHistoryFragment();
+
+                ;
 
 
 

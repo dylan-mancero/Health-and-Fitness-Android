@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,27 +7,52 @@
 
 
     <TextView
-        android:id="@+id/FoodEditText"
+        android:id="@+id/FoodTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:hint="Food/drink"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.291" />
+        app:layout_constraintVertical_bias="0.238" />
+
+    <TextView
+        android:id="@+id/gramMilText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="g."
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/BtnConfirmAddFood"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.094"
+        app:layout_constraintStart_toEndOf="@+id/editTextAmount"
+        app:layout_constraintTop_toBottomOf="@+id/FoodTextView"
+        app:layout_constraintVertical_bias="0.511" />
+
+    <EditText
+        android:id="@+id/editTextAmount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="76dp"
+        android:hint="amount here"
+        app:layout_constraintBottom_toTopOf="@+id/BtnConfirmAddFood"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/FoodTextView"
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/BtnConfirmAddFood"
-        android:layout_width="108dp"
-        android:layout_height="52dp"
-        android:text="Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add this tasty thing"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.521"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.706" />
+        app:layout_constraintVertical_bias="0.565" />
 </androidx.constraintlayout.widget.ConstraintLayout>

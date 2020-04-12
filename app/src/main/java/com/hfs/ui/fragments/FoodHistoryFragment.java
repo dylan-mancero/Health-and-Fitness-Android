@@ -12,11 +12,17 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.hfs.lib.StandardProfile;
 import com.hfs.ui.FoodHistoryAdapter;
+import com.hfs.ui.HFSApplication;
 import com.hfs.ui.R;
+import com.hfs.ui.di.DaggerHomeComponent;
+import com.hfs.ui.di.DaggerProfileComponent;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+
+import javax.inject.Inject;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -29,6 +35,8 @@ public class FoodHistoryFragment extends Fragment {
     private ArrayList<String> fDates = new ArrayList<>();
     private View fragment;
 
+    @Inject StandardProfile profile;
+
 
     public FoodHistoryFragment() {
         // Required empty public constructor
@@ -40,6 +48,12 @@ public class FoodHistoryFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_food_history, container, false);
         fragment = view;
         Log.d( TAG, "onCreateView: has been created");
+
+        DaggerProfileComponent.builder()
+                .appComponent(((HFSApplication) this.getActivity().getApplication()).getAppComponent())
+                .build()
+                .inject(this);
+        Log.d(TAG, "onCreateView: "+ profile);
 
 
         initImageBitmaps();
