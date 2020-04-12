@@ -7,9 +7,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.hfs.ui.FoodHistoryAdapter;
 import com.hfs.ui.R;
 
@@ -42,6 +44,19 @@ public class FoodHistoryFragment extends Fragment {
 
         initImageBitmaps();
         initFoodRecyclerView();
+
+        AddFoodItemFragment frag = new AddFoodItemFragment();
+        FloatingActionButton addnew = (FloatingActionButton) view.findViewById(R.id.addNewFoodBtn);
+        addnew.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AddFoodItemFragment frag = new AddFoodItemFragment();
+
+                FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.main_frame, frag);
+                fragmentTransaction.commit();
+            }
+        });
 
         return view;
     }
