@@ -1,12 +1,39 @@
 package com.hfs.lib.activity;
 
+import androidx.room.Ignore;
+import androidx.room.TypeConverters;
+
+import com.hfs.lib.typeconverters.OffsetDateTimeConverter;
+
 import java.time.OffsetDateTime;
 import java.util.Objects;
 
 public class UnfinishedActivity {
 
+	@TypeConverters(OffsetDateTimeConverter.class)
 	private final OffsetDateTime start;
-	private final Activity activity;
+
+	public long activityId;
+	@Ignore
+	private Activity activity;
+
+	/**
+	 * Only for Android Room.
+	 * @param start
+	 */
+	@Deprecated
+	public UnfinishedActivity(OffsetDateTime start) {
+		this.start = start;
+	}
+
+	/**
+	 * Only for Android Room.
+	 * @param activity
+	 */
+	@Deprecated
+	public void setActivity(Activity activity){
+		this.activity = activity;
+	}
 
 	/**
 	 * 

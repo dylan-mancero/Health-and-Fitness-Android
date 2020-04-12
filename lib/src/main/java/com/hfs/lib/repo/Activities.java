@@ -4,7 +4,7 @@ import android.app.Application;
 
 import com.hfs.lib.activity.Activity;
 import com.hfs.lib.dao.ActivitiesDao;
-import com.hfs.lib.db.ActivitiesDatabase;
+import com.hfs.lib.HFSDatabase;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -19,7 +19,7 @@ public class Activities {
     private final List<Activity> activities;
 
     private Activities(Application application){
-        ActivitiesDatabase db = ActivitiesDatabase.getInstance(application);
+        HFSDatabase db = HFSDatabase.getInstance(application);
         this.activitiesDao = db.activitiesDao();
 
         activities = new ArrayList<>(this.activitiesDao.loadAllExercises());

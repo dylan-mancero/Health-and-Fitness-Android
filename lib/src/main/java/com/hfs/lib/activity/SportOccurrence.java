@@ -1,12 +1,41 @@
 package com.hfs.lib.activity;
 
+import androidx.room.Entity;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
+
 import java.time.Duration;
 import java.time.temporal.ChronoUnit;
 
+@Entity
 public class SportOccurrence extends ActivityOccurrence {
 
+	@PrimaryKey(autoGenerate = true)
+	public long sportOccurrenceId;
+
 	private final double caloriesBurned;
-	private final ActivityReport report;
+
+	@Ignore
+	private ActivityReport report;
+
+	/**
+	 * Only for Android Room.
+	 * @param caloriesBurned
+	 */
+	@Deprecated
+	public SportOccurrence(double caloriesBurned) {
+		this.caloriesBurned = caloriesBurned;
+	}
+
+	/**
+	 * Only for Android Room.
+	 * @param finishedActivity
+	 */
+	@Deprecated
+	public void init(FinishedActivity finishedActivity){
+		super.setFinishedActivity(finishedActivity);
+		this.report = genReport(finishedActivity, this.caloriesBurned);
+	}
 
 	/**
 	 * 
@@ -24,20 +53,23 @@ public class SportOccurrence extends ActivityOccurrence {
 		}
 
 		this.caloriesBurned = calculateCaloriesBurned(finishedActivity.getDuration(), sport);
+		this.report = genReport(finishedActivity, caloriesBurned);
+	}
 
+	private static ActivityReport genReport(FinishedActivity finishedActivity, double caloriesBurned){
 		final StringBuffer reportBuffer = new StringBuffer();
-		reportBuffer.append(finishedActivity.getActivity().getName() + " - " + this.caloriesBurned + " kCal burned.\n");
+		reportBuffer.append(finishedActivity.getActivity().getName() + " - " + caloriesBurned + " kCal burned.\n");
 		reportBuffer.append("Duration: " + finishedActivity.getDuration().toString() + "\n");
 
-		if(this.caloriesBurned > 300.0){
+		if(caloriesBurned > 300.0){
 			reportBuffer.append("Amazing.");
-		} else if(this.caloriesBurned > 150.0){
+		} else if(caloriesBurned > 150.0){
 			reportBuffer.append("Well done.");
 		} else {
 			reportBuffer.append("Keep it up.");
 		}
 
-		this.report = new ActivityReport(reportBuffer.toString());
+		return new ActivityReport(reportBuffer.toString());
 	}
 
 	public static double calculateCaloriesBurned(Duration duration, Sport sport){
@@ -49,6 +81,11 @@ public class SportOccurrence extends ActivityOccurrence {
 	}
 
 	public ActivityReport getActivityReport() {
+		if(this.report == null){
+			throw new NullPointerException("ActivityReport not initialised, you need to call init() first." +
+					"\nDo not use deprecated constructor." +
+					"\nThis should only occur in case of Android Room.");
+		}
 		return this.report;
 	}
 

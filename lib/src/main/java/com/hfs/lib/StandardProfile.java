@@ -1,28 +1,49 @@
 package com.hfs.lib;
 
+import androidx.room.Entity;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
+import androidx.room.TypeConverters;
+
 import com.hfs.lib.activity.Activity;
 import com.hfs.lib.activity.UnfinishedActivity;
-import com.hfs.lib.repo.Exercises;
 import com.hfs.lib.activity.FinishedActivity;
-import com.hfs.lib.repo.Sports;
 import com.hfs.lib.nutrition.Consumable;
 import com.hfs.lib.nutrition.ConsumableOccurance;
-import com.hfs.lib.repo.Consumables;
 import com.hfs.lib.nutrition.Nutrition;
+import com.hfs.lib.typeconverters.GoalConverter;
 
 import java.time.OffsetDateTime;
 import java.util.List;
 
+@Entity
 public class StandardProfile {
 
+    @PrimaryKey(autoGenerate = true)
+	public long standardProfileId;
+
 	private boolean reportSharing;
+	@Ignore
 	private int sharablePin;
 	private double height;
 	private double weight;
+	@TypeConverters(GoalConverter.class)
 	private Goal goal;
+
+	@Ignore
 	private Nutrition nutrition;
+	@Ignore
 	private Schedule schedule;
+	@Ignore
 	private Fitness fitness;
+
+	public StandardProfile(long standardProfileId, boolean reportSharing, double height, double weight, Goal goal) {
+		this.standardProfileId = standardProfileId;
+		this.reportSharing = reportSharing;
+		this.height = height;
+		this.weight = weight;
+		this.goal = goal;
+	}
 
 	/**
 	 * 
@@ -37,7 +58,8 @@ public class StandardProfile {
 	}
 
 	public int getSharablePin() {
-		return this.sharablePin;
+		// TODO: Implement sharable pin.
+		throw new UnsupportedOperationException("Sharable Pin not implemented.");
 	}
 
 	/**
@@ -81,7 +103,7 @@ public class StandardProfile {
 	    this.fitness.removeActivitySession(activity);
 	}
 
-	public boolean isSharingReports() {
+	public boolean getReportSharing() {
 	    return this.reportSharing;
 	}
 

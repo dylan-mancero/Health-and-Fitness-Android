@@ -1,14 +1,58 @@
 package com.hfs.lib.activity;
 
+import androidx.room.Embedded;
+import androidx.room.Entity;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
+import androidx.room.TypeConverters;
+
+import com.hfs.lib.typeconverters.DurationConverter;
+
 import java.time.DateTimeException;
 import java.time.Duration;
 import java.time.OffsetDateTime;
 
+@Entity
 public class FinishedActivity implements ReportableStrategy {
 
+	@PrimaryKey(autoGenerate = true)
+	public long finishedActivityId;
+	public long userId;
+	public boolean isSportOrExercise;
+	public long sportOrExerciseOccurrenceId;
+
+	@TypeConverters({DurationConverter.class})
 	private final Duration duration;
-	private final UnfinishedActivity unfinishedActivity;
-	private final ActivityOccurrence activityOccurrence;
+	@Embedded public UnfinishedActivity unfinishedActivity;
+	@Ignore
+	private ActivityOccurrence activityOccurrence;
+
+	/**
+	 * Only for Android Room.
+	 * @param duration
+	 */
+	@Deprecated
+	public FinishedActivity(Duration duration){
+		this.duration = duration;
+	}
+
+
+	public UnfinishedActivity getUnfinishedActivity() {
+		return unfinishedActivity;
+	}
+
+	// TODO: Make setters immutable.
+	public void setUnfinishedActivity(UnfinishedActivity unfinishedActivity) {
+		this.unfinishedActivity = unfinishedActivity;
+	}
+
+	public ActivityOccurrence getActivityOccurrence() {
+		return activityOccurrence;
+	}
+
+	public void setActivityOccurrence(ActivityOccurrence activityOccurrence) {
+		this.activityOccurrence = activityOccurrence;
+	}
 
 	/**
 	 * 

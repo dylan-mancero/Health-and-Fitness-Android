@@ -1,8 +1,18 @@
 package com.hfs.lib.activity;
 
+import androidx.room.Ignore;
+
 public abstract class ActivityOccurrence implements ReportableStrategy {
 
-	private final FinishedActivity finishedActivity;
+	@Ignore
+	private FinishedActivity finishedActivity;
+
+	protected ActivityOccurrence(){
+	}
+
+	protected void setFinishedActivity(FinishedActivity finishedActivity){
+		this.finishedActivity = finishedActivity;
+	}
 
 	/**
 	 * 

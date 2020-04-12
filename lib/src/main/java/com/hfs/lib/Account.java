@@ -1,8 +1,19 @@
 package com.hfs.lib;
 
-import java.awt.Image;
+import android.content.Context;
+
+import androidx.room.Database;
+import androidx.room.Room;
+import androidx.room.RoomDatabase;
+
+import com.hfs.lib.activity.Activity;
+import com.hfs.lib.activity.ExerciseOccurrence;
+import com.hfs.lib.activity.FinishedActivity;
+import com.hfs.lib.activity.Sport;
+import com.hfs.lib.activity.SportOccurrence;
+import com.hfs.lib.dao.StandardProfileDao;
+
 import java.time.OffsetDateTime;
-import java.util.Date;
 
 public class Account {
 
@@ -10,7 +21,8 @@ public class Account {
 	private String password;
 	private String email;
 	private OffsetDateTime dateOfBirth;
-	private Image image;
+	// TODO : implement image
+	//  private Image image;
 	private Gender gender;
 
 	/**
@@ -63,9 +75,11 @@ public class Account {
 		this.email = email;
 	}
 
+	/*
 	public Image getImage() {
 		return this.image;
 	}
+	 */
 
 	/**
 	 * 
@@ -76,4 +90,23 @@ public class Account {
 		throw new UnsupportedOperationException();
 	}
 
+	@Database(entities = {Activity.class, Sport.class, StandardProfile.class, FinishedActivity.class, SportOccurrence.class, ExerciseOccurrence.class}, version = 1)
+	public abstract static class HFSDatabase extends RoomDatabase {
+		private static HFSDatabase instance;
+
+		public abstract StandardProfileDao activitiesDao();
+
+		public static synchronized HFSDatabase getInstance(Context context) {
+			// TODO: Run db in a background thread - remove allowMainThredQueries()
+			if(instance == null){
+				instance = Room.databaseBuilder(context.getApplicationContext(),
+						HFSDatabase.class, "hfs_db")
+						.allowMainThreadQueries()
+						.fallbackToDestructiveMigration()
+						.build();
+			}
+
+			return instance;
+		}
+	}
 }
