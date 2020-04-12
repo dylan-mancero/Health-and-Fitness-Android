@@ -1,6 +1,7 @@
 package com.hfs.ui;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,15 +13,9 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
-import com.hfs.lib.StandardProfile;
 import com.hfs.lib.activity.FinishedActivity;
-import com.hfs.lib.activity.UnfinishedActivity;
-import com.hfs.lib.repo.Sports;
 import com.hfs.ui.viewmodels.ActivityHistoryViewModel;
 
-import java.time.OffsetDateTime;
-import java.time.ZoneOffset;
 import java.util.List;
 import java.util.Random;
 
@@ -33,15 +28,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     private List<FinishedActivity> activities;
     final private Context context;
 
-    // TODO: Remove, only used for the addActivity simulation
-    final ActivityHistoryViewModel viewModel;
-
     public RecyclerViewAdapter(Context context, List<FinishedActivity> activities, ActivityHistoryViewModel viewModel){
         this.activities = activities;
         this.context = context;
-
-        // TODO: Remove, only used for the addActivity simulation
-        this.viewModel = viewModel;
     }
 
     @NonNull
@@ -78,24 +67,13 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
            public void onClick(View view) {
                final Random rand = new Random();
                Log.d(TAG, "onClick: clicked on: " + finishedActivity.toString());
-
-               // TODO: Remove. - addActivity simulation.
-               // Simulating additions of activities.
-               final UnfinishedActivity dummyUnfinishedActivity = new UnfinishedActivity(
-                       Sports.getInstance().getSport("Running"),
-                       OffsetDateTime.of(2019,
-                               rand.nextInt(12) + 1,
-                               rand.nextInt(20) + 1,
-                               rand.nextInt(24),
-                               rand.nextInt(60),
-                               0, 0, ZoneOffset.UTC));
-               final FinishedActivity dummyFinishedActivity = dummyUnfinishedActivity.end();
-               viewModel.addActivity(dummyFinishedActivity);
-               notifyDataSetChanged();
-
                //===============================================================================
                //CODE HERE WHAT YOU WOULD LIKE THE APP TO DO ON CLICK OF THE SPECIFIC ACTIVITY_HISTORY ITEM.
                //===============================================================================
+
+               //Adding the popup window on click on activity.
+               context.startActivity(new Intent(context, ActivityHistoryPopupActivity.class));
+
                Toast.makeText(context, finishedActivity.toString(), Toast.LENGTH_SHORT).show();
            }
         });
@@ -127,7 +105,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             name = itemView.findViewById(R.id.image_name);
             date = itemView.findViewById(R.id.image_date);
             parentLayout = itemView.findViewById(R.id.parent_layout);
-
         }
     }
 }
