@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
@@ -28,6 +29,7 @@ import javax.inject.Inject;
  * A simple {@link Fragment} subclass.
  */
 public class FoodHistoryFragment extends Fragment {
+
 
     private static final String TAG ="FoodStuff ;";
     private ArrayList<String> fAmounts = new ArrayList<>();
@@ -54,6 +56,10 @@ public class FoodHistoryFragment extends Fragment {
                 .build()
                 .inject(this);
         Log.d(TAG, "onCreateView: "+ profile);
+
+        TextView protein = (TextView) view.findViewById(R.id.TxtViewProtein);
+
+       // double pro = profile.getNutrition().getProtein();
 
 
         initImageBitmaps();
