@@ -14,7 +14,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.hfs.lib.activity.FinishedActivity;
-import com.hfs.ui.viewmodels.ActivityHistoryViewModel;
 
 import java.util.List;
 import java.util.Random;
@@ -28,7 +27,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     private List<FinishedActivity> activities;
     final private Context context;
 
-    public RecyclerViewAdapter(Context context, List<FinishedActivity> activities, ActivityHistoryViewModel viewModel){
+    public RecyclerViewAdapter(Context context, List<FinishedActivity> activities){
         this.activities = activities;
         this.context = context;
     }
@@ -82,7 +81,11 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     //Method to inform the adapter--> How many list items are in your list..., If 'return 0', would not display anything on screen at run-time...
     @Override
     public int getItemCount() {
-        return activities.size();
+        if(activities == null){
+            return 0;
+        } else {
+            return activities.size();
+        }
     }
 
     public void setActivities(List<FinishedActivity> activities){

@@ -143,9 +143,12 @@ public abstract class HFSDatabase extends RoomDatabase {
     }
 
     public StandardProfile getStandardProfile(Application app, long id){
+        // TODO: Add Schedule and Nutrition.
         final StandardProfile profile = standardProfileDao().getStandardProfile(id);
+
         profile.setFitness(new Fitness(app, profile));
-        return standardProfileDao().getStandardProfile(id);
+
+        return profile;
     }
 
 }

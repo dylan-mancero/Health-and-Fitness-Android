@@ -3,7 +3,6 @@ package com.hfs.ui.di;
 import com.hfs.ui.fragments.ActivityHistoryFragment;
 import com.hfs.ui.fragments.AddFoodItemFragment;
 import com.hfs.ui.fragments.FoodHistoryFragment;
-import com.hfs.ui.viewmodels.ActivityHistoryViewModel;
 
 import dagger.Component;
 
@@ -11,8 +10,9 @@ import dagger.Component;
 @Component(dependencies = AppComponent.class)
 public interface ProfileComponent {
 
-    void inject(ActivityHistoryViewModel activityHistoryViewModel);
     void inject(AddFoodItemFragment addFoodItemFragment);
+
+    void inject(ActivityHistoryFragment activityHistoryFragment);
 
     void inject(FoodHistoryFragment foodHistoryFrag);
 

@@ -12,12 +12,16 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.hfs.lib.StandardProfile;
 import com.hfs.lib.activity.FinishedActivity;
+import com.hfs.ui.HFSApplication;
 import com.hfs.ui.R;
 import com.hfs.ui.RecyclerViewAdapter;
-import com.hfs.ui.viewmodels.ActivityHistoryViewModel;
+import com.hfs.ui.di.DaggerProfileComponent;
 
 import java.util.List;
+
+import javax.inject.Inject;
 
 
 /**
@@ -26,6 +30,8 @@ import java.util.List;
 public class ActivityHistoryFragment extends Fragment {
 
     private static final String TAG = "FoodHistoryFragment";
+
+    @Inject StandardProfile profile;
 
     public ActivityHistoryFragment() {
         // Required empty public constructor
@@ -38,16 +44,20 @@ public class ActivityHistoryFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_activity_history, container, false);
 
-        final ActivityHistoryViewModel viewModel = new ViewModelProvider(this).get(ActivityHistoryViewModel.class);
-        final LiveData<List<FinishedActivity>> activities = viewModel.getActivities();
+        DaggerProfileComponent.builder()
+                .appComponent(((HFSApplication) getActivity().getApplication()).getAppComponent())
+                .build()
+                .inject(this);
+
+        final LiveData<List<FinishedActivity>> activities = profile.getPastActivitySessions();
 
         Log.d(TAG, "initRecyclerView: init recyclerview.");
         RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
-        RecyclerViewAdapter adapter = new RecyclerViewAdapter(this.getContext(), activities.getValue(), viewModel);
+        RecyclerViewAdapter adapter = new RecyclerViewAdapter(this.getContext(), activities.getValue());
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
 
-        viewModel.getActivities().observe(getViewLifecycleOwner(), adapter::setActivities);
+        activities.observe(getViewLifecycleOwner(), adapter::setActivities);
 
         Log.d(TAG, "onCreateView: started.");
 

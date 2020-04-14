@@ -7,6 +7,7 @@ import androidx.room.PrimaryKey;
 import androidx.room.TypeConverters;
 
 import com.hfs.lib.dao.ActivitiesDao;
+import com.hfs.lib.repo.Activities;
 import com.hfs.lib.typeconverters.DurationConverter;
 
 import java.time.DateTimeException;
@@ -44,6 +45,7 @@ public class FinishedActivity implements ReportableStrategy {
 	@Deprecated
 	public FinishedActivity init(ActivitiesDao activitiesDao){
 		this.unfinishedActivity = activitiesDao.getUnfinishedActivity(this.finishedActivityId);
+		this.unfinishedActivity.init(new Activities(activitiesDao));
 		return this;
 	}
 

@@ -17,7 +17,6 @@ import com.hfs.lib.StandardProfile;
 import com.hfs.ui.FoodHistoryAdapter;
 import com.hfs.ui.HFSApplication;
 import com.hfs.ui.R;
-import com.hfs.ui.di.DaggerHomeComponent;
 import com.hfs.ui.di.DaggerProfileComponent;
 
 import java.time.LocalDate;

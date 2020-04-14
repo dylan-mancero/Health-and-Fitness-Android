@@ -5,6 +5,7 @@ import android.app.Application;
 import android.util.Log;
 
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 
 import com.hfs.lib.activity.Activity;
 import com.hfs.lib.activity.FinishedActivity;
@@ -16,14 +17,15 @@ import com.hfs.lib.dao.ActivitiesDao;
 import java.time.OffsetDateTime;
 import java.util.List;
 
-public class Fitness {
+public class Fitness{
 	private static Fitness instance;
 
 	private final ActivitiesDao activitiesDao;
 
 	private double caloriesBurned = 0;
 
-	private final LiveData<List<FinishedActivity>> activities;
+	private final List<FinishedActivity> activities;
+	private MutableLiveData<List<FinishedActivity>> activitiesLiveData;
 
 	private final StandardProfile standardProfile;
 
@@ -34,7 +36,8 @@ public class Fitness {
 	@Deprecated
 	public Fitness(ActivitiesDao activitiesDao, StandardProfile profile){
 		this.activitiesDao = activitiesDao;
-		this.activities = activitiesDao.loadAllFinishedActivities(profile.getStandardProfileId());
+		this.activities = activitiesDao.loadFinishedActivities(profile.getStandardProfileId());
+		this.activities.forEach(activity -> activity.init(activitiesDao));
 		this.standardProfile = profile;
 		// TODO: Update calories on load.
 	}
@@ -42,7 +45,9 @@ public class Fitness {
 	public Fitness(Application application, StandardProfile profile) {
 		final HFSDatabase db = HFSDatabase.getInstance(application);
 		this.activitiesDao = db.activitiesDao();
-		this.activities = this.activitiesDao.loadAllFinishedActivities(profile.getStandardProfileId());
+		this.activities = this.activitiesDao.loadFinishedActivities(profile.getStandardProfileId());
+		this.activities.forEach(activity -> activity.init(activitiesDao));
+		this.activitiesLiveData = new MutableLiveData<>(this.activities);
 		this.standardProfile = profile;
 	}
 
@@ -69,15 +74,18 @@ public class Fitness {
 		Log.d("ADDING UNFINISHED ACTIVITY:", unfinishedActivity.getActivityName());
 		final long unfinishedActivityId = this.activitiesDao.insert(unfinishedActivity)[0];
 		unfinishedActivity.id = unfinishedActivityId;
+
 		final FinishedActivity finishedActivity = new FinishedActivity(unfinishedActivity, endTime);
 		this.addActivitySession(finishedActivity);
+		this.activities.add(finishedActivity);
 	}
 
 	public LiveData<List<FinishedActivity>> getActivitySessions() {
-	    return this.activities;
+	    return this.activitiesLiveData;
 	}
 
 	public void removeActivitySession(FinishedActivity activity) {
+		// TODO: Implement removal of finished activity.
 		if(activity != null) {
 			this.activitiesDao.delete(activity);
 		}

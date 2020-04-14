@@ -107,7 +107,6 @@ public class LoginActivity extends AppCompatActivity {
         final HFSApplication app = (HFSApplication) getApplication();
         final HFSDatabase db = app.getDatabase();
         db.dump();
-        //db.prePopulate();
         app.initStandardProfile(db.getStandardProfile(app, 1));
     }
 
