@@ -3,6 +3,7 @@ package com.hfs.ui;
 import android.app.Application;
 import android.util.Log;
 
+import com.hfs.lib.HFSDatabase;
 import com.hfs.lib.StandardProfile;
 import com.hfs.lib.repo.Activities;
 import com.hfs.ui.di.AppComponent;
@@ -14,9 +15,12 @@ public class HFSApplication extends Application {
     private static final String TAG = "HFSApplication";
     private AppComponent appComponent;
 
+    private HFSDatabase database;
+
     @Override
     public void onCreate() {
         super.onCreate();
+        this.database = HFSDatabase.getInstance(getApplicationContext());
     }
 
     public void initStandardProfile(StandardProfile standardProfile){
@@ -28,6 +32,7 @@ public class HFSApplication extends Application {
                     .repoModule(RepoModule.getInstance(Activities.getInstance(this)))
                     .build();
         }
+
     }
 
     public AppComponent getAppComponent() {
@@ -37,4 +42,7 @@ public class HFSApplication extends Application {
         return appComponent;
     }
 
+    public HFSDatabase getDatabase() {
+        return database;
+    }
 }

@@ -1,57 +1,60 @@
 package com.hfs.lib.activity;
 
-import androidx.room.Embedded;
 import androidx.room.Entity;
+import androidx.room.ForeignKey;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 import androidx.room.TypeConverters;
 
+import com.hfs.lib.dao.ActivitiesDao;
 import com.hfs.lib.typeconverters.DurationConverter;
 
 import java.time.DateTimeException;
 import java.time.Duration;
 import java.time.OffsetDateTime;
 
-@Entity
+import static androidx.room.ForeignKey.CASCADE;
+@Entity(foreignKeys = {
+	@ForeignKey(
+			entity = UnfinishedActivity.class,
+			parentColumns = "id",
+			childColumns = "unfinishedActivityId",
+			onDelete = CASCADE
+	)
+})
 public class FinishedActivity implements ReportableStrategy {
 
 	@PrimaryKey(autoGenerate = true)
 	public long finishedActivityId;
-	public long userId;
-	public boolean isSportOrExercise;
-	public long sportOrExerciseOccurrenceId;
 
 	@TypeConverters({DurationConverter.class})
 	private final Duration duration;
-	@Embedded public UnfinishedActivity unfinishedActivity;
+	@Ignore
+	private UnfinishedActivity unfinishedActivity;
+	private final long unfinishedActivityId;
 	@Ignore
 	private ActivityOccurrence activityOccurrence;
 
-	/**
-	 * Only for Android Room.
-	 * @param duration
-	 */
 	@Deprecated
-	public FinishedActivity(Duration duration){
+	public FinishedActivity(Duration duration, long unfinishedActivityId){
 		this.duration = duration;
+		this.unfinishedActivityId = unfinishedActivityId;
 	}
 
+	@Deprecated
+	public FinishedActivity init(ActivitiesDao activitiesDao){
+		this.unfinishedActivity = activitiesDao.getUnfinishedActivity(this.finishedActivityId);
+		return this;
+	}
 
+	@Deprecated
+	public long getUnfinishedActivityId() {
+		return unfinishedActivityId;
+	}
+
+	@Deprecated
 	public UnfinishedActivity getUnfinishedActivity() {
 		return unfinishedActivity;
-	}
-
-	// TODO: Make setters immutable.
-	public void setUnfinishedActivity(UnfinishedActivity unfinishedActivity) {
-		this.unfinishedActivity = unfinishedActivity;
-	}
-
-	public ActivityOccurrence getActivityOccurrence() {
-		return activityOccurrence;
-	}
-
-	public void setActivityOccurrence(ActivityOccurrence activityOccurrence) {
-		this.activityOccurrence = activityOccurrence;
 	}
 
 	/**
@@ -71,6 +74,7 @@ public class FinishedActivity implements ReportableStrategy {
 	 * @param endTime
 	 */
 	public FinishedActivity(UnfinishedActivity unfinishedActivity, OffsetDateTime endTime) throws DateTimeException{
+		this.unfinishedActivityId = unfinishedActivity.id;
 		final OffsetDateTime start = unfinishedActivity.getStart();
 		if(start.isAfter(endTime)){
 			throw new DateTimeException("Provided end time is invalid.\nStart time: " + start.toString() + "\tEnd time: " + endTime.toString());
@@ -86,6 +90,7 @@ public class FinishedActivity implements ReportableStrategy {
 	}
 
 	public FinishedActivity(UnfinishedActivity unfinishedActivity, OffsetDateTime endTime, int sets, int reps) throws DateTimeException{
+		this.unfinishedActivityId = unfinishedActivity.id;
 		final OffsetDateTime start = unfinishedActivity.getStart();
 		if(endTime.isAfter(start)){
 			throw new DateTimeException("Provided end time is invalid.\nStart time: " + start.toString() + "\tEnd time: " + endTime.toString());

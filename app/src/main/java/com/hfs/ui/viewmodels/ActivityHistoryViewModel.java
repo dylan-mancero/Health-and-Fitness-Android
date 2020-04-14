@@ -30,8 +30,7 @@ public class ActivityHistoryViewModel extends AndroidViewModel {
                 .build()
                 .inject(this);
 
-        final List<FinishedActivity> activities = profile.getPastActivitySessions();
-        this.activitiesLiveData = new MutableLiveData<>(activities);
+        this.activitiesLiveData = profile.getPastActivitySessions();
     }
 
     public void addActivity(FinishedActivity activity){

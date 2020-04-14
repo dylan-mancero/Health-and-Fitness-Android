@@ -2,7 +2,7 @@ package com.hfs.lib.activity;
 
 import androidx.room.Entity;
 
-@Entity
+@Entity(ignoredColumns = "isSportOrExercise")
 public class Sport extends Activity {
 
 	private final double calorieMultiplier;
@@ -12,7 +12,7 @@ public class Sport extends Activity {
 	 * @param calorieMultiplier
 	 */
 	public Sport(String name, double calorieMultiplier) {
-		super(name);
+		super(name, IS_SPORT);
 		this.calorieMultiplier = calorieMultiplier;
 	}
 

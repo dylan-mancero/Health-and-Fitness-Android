@@ -11,6 +11,7 @@ import com.hfs.lib.activity.ExerciseOccurrence;
 import com.hfs.lib.activity.FinishedActivity;
 import com.hfs.lib.activity.Sport;
 import com.hfs.lib.activity.SportOccurrence;
+import com.hfs.lib.activity.UnfinishedActivity;
 import com.hfs.lib.dao.StandardProfileDao;
 
 import java.time.OffsetDateTime;
@@ -90,7 +91,7 @@ public class Account {
 		throw new UnsupportedOperationException();
 	}
 
-	@Database(entities = {Activity.class, Sport.class, StandardProfile.class, FinishedActivity.class, SportOccurrence.class, ExerciseOccurrence.class}, version = 1)
+	@Database(entities = {Activity.class, Sport.class, StandardProfile.class, UnfinishedActivity.class, FinishedActivity.class, SportOccurrence.class, ExerciseOccurrence.class}, version = 1)
 	public abstract static class HFSDatabase extends RoomDatabase {
 		private static HFSDatabase instance;
 

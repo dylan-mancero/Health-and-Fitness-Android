@@ -18,6 +18,17 @@ public class Activities {
     // Acts as a cache
     private final List<Activity> activities;
 
+    /**
+     * Only for Room.
+     * @param activitiesDao
+     */
+    @Deprecated
+    public Activities(ActivitiesDao activitiesDao){
+        this.activitiesDao = activitiesDao;
+        this.activities = new ArrayList<>(activitiesDao.loadAllExercises());
+        this.activities.addAll(activitiesDao.loadAllSports());
+    }
+
     private Activities(Application application){
         HFSDatabase db = HFSDatabase.getInstance(application);
         this.activitiesDao = db.activitiesDao();

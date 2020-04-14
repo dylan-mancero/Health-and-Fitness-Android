@@ -6,20 +6,24 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 @Entity
-public abstract class Activity {
+public class Activity {
 
 	@PrimaryKey
 	@NonNull private final String name;
+	private final boolean isSportOrExercise;
+	public static boolean IS_SPORT = true, IS_EXERCISE = false;
 
-	// For Room persistence.
-	public boolean isSportOrExercise;
-
-	public Activity(@NonNull String name) {
+	public Activity(@NonNull String name, boolean isSportOrExercise) {
 		this.name = name;
+		this.isSportOrExercise = isSportOrExercise;
 	}
 
 	public String getName() {
 		return this.name;
+	}
+
+	public boolean isSportOrExercise() {
+		return isSportOrExercise;
 	}
 
 	@Override

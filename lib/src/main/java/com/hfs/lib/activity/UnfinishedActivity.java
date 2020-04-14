@@ -1,56 +1,86 @@
 package com.hfs.lib.activity;
 
+import androidx.room.Entity;
+import androidx.room.ForeignKey;
 import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
 import androidx.room.TypeConverters;
 
+import com.hfs.lib.StandardProfile;
+import com.hfs.lib.dao.ActivitiesDao;
+import com.hfs.lib.repo.Activities;
 import com.hfs.lib.typeconverters.OffsetDateTimeConverter;
 
 import java.time.OffsetDateTime;
 import java.util.Objects;
 
+import static androidx.room.ForeignKey.NO_ACTION;
+@Entity(foreignKeys = {
+		@ForeignKey(
+				entity = StandardProfile.class,
+				parentColumns = "standardProfileId",
+				childColumns = "userId",
+				onDelete = NO_ACTION),
+		@ForeignKey(
+				entity = Activity.class,
+				parentColumns = "name",
+				childColumns = "activityName",
+				onDelete = NO_ACTION
+		)
+})
 public class UnfinishedActivity {
+
+	@PrimaryKey(autoGenerate = true)
+	public long id;
 
 	@TypeConverters(OffsetDateTimeConverter.class)
 	private final OffsetDateTime start;
 
-	public long activityId;
+	// Foreign keys
+	private final long userId;
+	private final String activityName;
 	@Ignore
 	private Activity activity;
 
 	/**
-	 * Only for Android Room.
-	 * @param start
+	 * Only For Room.
 	 */
 	@Deprecated
-	public UnfinishedActivity(OffsetDateTime start) {
+	public UnfinishedActivity(String activityName, OffsetDateTime start, long userId){
+		this.activityName = activityName;
 		this.start = start;
+		this.userId = userId;
 	}
 
 	/**
-	 * Only for Android Room.
-	 * @param activity
+	 * Only for Room.
+	 * @param activities
+	 * @return
 	 */
 	@Deprecated
-	public void setActivity(Activity activity){
-		this.activity = activity;
+	public UnfinishedActivity init(Activities activities){
+		this.activity = activities.getActivity(activityName);
+		return this;
 	}
 
 	/**
-	 * 
-	 * @param activity
+	 * Only for Room.
+	 * @return
 	 */
-	public UnfinishedActivity(Activity activity) {
-	    this(activity, OffsetDateTime.now());
+	@Deprecated
+	public long getUserId() {
+		return userId;
 	}
 
-	/**
-	 * 
-	 * @param activity
-	 * @param start
-	 */
-	public UnfinishedActivity(Activity activity, OffsetDateTime start) {
+	public UnfinishedActivity(Activity activity, StandardProfile profile) {
+	    this(activity, OffsetDateTime.now(), profile);
+	}
+
+	public UnfinishedActivity(Activity activity, OffsetDateTime start, StandardProfile profile) {
 		this.activity = activity;
+		this.activityName = activity.getName();
 		this.start = start;
+		this.userId = profile.getStandardProfileId();
 	}
 
 	public FinishedActivity end() {
@@ -67,6 +97,10 @@ public class UnfinishedActivity {
 
 	public Activity getActivity() {
 	    return this.activity;
+	}
+
+	public String getActivityName() {
+		return this.activityName;
 	}
 
 	@Override

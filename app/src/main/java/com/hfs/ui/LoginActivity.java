@@ -16,6 +16,9 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.hfs.lib.Fitness;
+import com.hfs.lib.HFSDatabase;
+import com.hfs.lib.StandardProfile;
 
 public class LoginActivity extends AppCompatActivity {
     EditText emailId, password;
@@ -101,7 +104,11 @@ public class LoginActivity extends AppCompatActivity {
 
     private void initialiseStandardProfile(){
         // TODO: Initialise properly.
-        ((HFSApplication) getApplication()).initStandardProfile(null);
+        final HFSApplication app = (HFSApplication) getApplication();
+        final HFSDatabase db = app.getDatabase();
+        db.dump();
+        //db.prePopulate();
+        app.initStandardProfile(db.getStandardProfile(app, 1));
     }
 
     @Override

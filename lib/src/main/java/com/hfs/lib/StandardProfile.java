@@ -1,5 +1,6 @@
 package com.hfs.lib;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
@@ -20,9 +21,10 @@ import java.util.List;
 public class StandardProfile {
 
     @PrimaryKey(autoGenerate = true)
-	public long standardProfileId;
+	private long standardProfileId;
 
 	private boolean reportSharing;
+	public static boolean SHARING = true, NOT_SHARING = false;
 	@Ignore
 	private int sharablePin;
 	private double height;
@@ -37,6 +39,15 @@ public class StandardProfile {
 	@Ignore
 	private Fitness fitness;
 
+	/**
+	 * Only for Room.
+	 * @param standardProfileId
+	 * @param reportSharing
+	 * @param height
+	 * @param weight
+	 * @param goal
+	 */
+	@Deprecated
 	public StandardProfile(long standardProfileId, boolean reportSharing, double height, double weight, Goal goal) {
 		this.standardProfileId = standardProfileId;
 		this.reportSharing = reportSharing;
@@ -45,16 +56,61 @@ public class StandardProfile {
 		this.goal = goal;
 	}
 
+	protected void setStandardProfileId(long standardProfileId) {
+		this.standardProfileId = standardProfileId;
+	}
+
 	/**
-	 * 
+	 * Only for Room.
 	 * @param nutrition
-	 * @param schedule
-	 * @param fitness
+	 * @return
 	 */
-	public StandardProfile(Nutrition nutrition, Schedule schedule, Fitness fitness) {
-	    this.nutrition = nutrition;
-	    this.schedule = schedule;
-	    this.fitness = fitness;
+	@Deprecated
+	public boolean setNutrition(Nutrition nutrition) {
+		if(this.nutrition == null) {
+			this.nutrition = nutrition;
+			return true;
+		} else{
+			return false;
+		}
+	}
+
+	/**
+	 * Only for Room.
+	 * @param schedule
+	 * @return
+	 */
+	@Deprecated
+	public boolean setSchedule(Schedule schedule) {
+		if(this.schedule == null) {
+			this.schedule = schedule;
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	/**
+	 * Only for Room.
+	 * @param fitness
+	 * @return
+	 */
+	@Deprecated
+	public boolean setFitness(Fitness fitness) {
+		if(this.fitness == null) {
+			this.fitness = fitness;
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	/**
+	 * Only for Room.
+	 * @return
+	 */
+	public long getStandardProfileId() {
+		return standardProfileId;
 	}
 
 	public int getSharablePin() {
@@ -67,10 +123,10 @@ public class StandardProfile {
 	 * @param activity
 	 */
 	public UnfinishedActivity startActivitySession(Activity activity) {
-		return new UnfinishedActivity(activity);
+		return new UnfinishedActivity(activity,this);
 	}
 
-	public UnfinishedActivity[] getFutureActivitySessions() {
+	public LiveData<List<UnfinishedActivity>> getFutureActivitySessions() {
 	    return this.schedule.getFutureActivitySessions();
 	}
 
@@ -91,12 +147,16 @@ public class StandardProfile {
 		this.schedule.removeActivitySession(activity);
 	}
 
-	public List<FinishedActivity> getPastActivitySessions() {
+	public LiveData<List<FinishedActivity>> getPastActivitySessions() {
 	    return this.fitness.getActivitySessions();
 	}
 
 	public void addPastActivitySession(FinishedActivity activity) {
 		this.fitness.addActivitySession(activity);
+	}
+
+	public void addPastActivitySession(Activity activity, OffsetDateTime startTime, OffsetDateTime endTime){
+		this.fitness.addActivitySession(activity, startTime, endTime);
 	}
 
 	public void removeActivitySession(FinishedActivity activity) {

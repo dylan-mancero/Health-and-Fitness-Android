@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "070409ce6de38eeeed42d1731498e2d8",
+    "identityHash": "a8340def5fc4f1cbab3c125b034d9bee",
     "entities": [
       {
         "tableName": "Activity",
@@ -32,14 +32,8 @@
       },
       {
         "tableName": "Sport",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`isSportOrExercise` INTEGER NOT NULL, `calorieMultiplier` REAL NOT NULL, `name` TEXT NOT NULL, PRIMARY KEY(`name`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`calorieMultiplier` REAL NOT NULL, `name` TEXT NOT NULL, PRIMARY KEY(`name`))",
         "fields": [
-          {
-            "fieldPath": "isSportOrExercise",
-            "columnName": "isSportOrExercise",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
           {
             "fieldPath": "calorieMultiplier",
             "columnName": "calorieMultiplier",
@@ -107,14 +101,20 @@
         "foreignKeys": []
       },
       {
-        "tableName": "FinishedActivity",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`finishedActivityId` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `userId` INTEGER NOT NULL, `isSportOrExercise` INTEGER NOT NULL, `sportOrExerciseOccurrenceId` INTEGER NOT NULL, `duration` TEXT, `start` TEXT, `activityId` INTEGER)",
+        "tableName": "UnfinishedActivity",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `start` TEXT, `userId` INTEGER NOT NULL, `activityName` TEXT, FOREIGN KEY(`userId`) REFERENCES `StandardProfile`(`standardProfileId`) ON UPDATE NO ACTION ON DELETE NO ACTION , FOREIGN KEY(`activityName`) REFERENCES `Activity`(`name`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
         "fields": [
           {
-            "fieldPath": "finishedActivityId",
-            "columnName": "finishedActivityId",
+            "fieldPath": "id",
+            "columnName": "id",
             "affinity": "INTEGER",
             "notNull": true
+          },
+          {
+            "fieldPath": "start",
+            "columnName": "start",
+            "affinity": "TEXT",
+            "notNull": false
           },
           {
             "fieldPath": "userId",
@@ -123,14 +123,51 @@
             "notNull": true
           },
           {
-            "fieldPath": "isSportOrExercise",
-            "columnName": "isSportOrExercise",
-            "affinity": "INTEGER",
-            "notNull": true
+            "fieldPath": "activityName",
+            "columnName": "activityName",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [],
+        "foreignKeys": [
+          {
+            "table": "StandardProfile",
+            "onDelete": "NO ACTION",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "userId"
+            ],
+            "referencedColumns": [
+              "standardProfileId"
+            ]
           },
           {
-            "fieldPath": "sportOrExerciseOccurrenceId",
-            "columnName": "sportOrExerciseOccurrenceId",
+            "table": "Activity",
+            "onDelete": "NO ACTION",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "activityName"
+            ],
+            "referencedColumns": [
+              "name"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "FinishedActivity",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`finishedActivityId` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `duration` TEXT, `unfinishedActivityId` INTEGER NOT NULL, FOREIGN KEY(`unfinishedActivityId`) REFERENCES `UnfinishedActivity`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "fields": [
+          {
+            "fieldPath": "finishedActivityId",
+            "columnName": "finishedActivityId",
             "affinity": "INTEGER",
             "notNull": true
           },
@@ -141,16 +178,10 @@
             "notNull": false
           },
           {
-            "fieldPath": "unfinishedActivity.start",
-            "columnName": "start",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "unfinishedActivity.activityId",
-            "columnName": "activityId",
+            "fieldPath": "unfinishedActivityId",
+            "columnName": "unfinishedActivityId",
             "affinity": "INTEGER",
-            "notNull": false
+            "notNull": true
           }
         ],
         "primaryKey": {
@@ -160,7 +191,19 @@
           "autoGenerate": true
         },
         "indices": [],
-        "foreignKeys": []
+        "foreignKeys": [
+          {
+            "table": "UnfinishedActivity",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "unfinishedActivityId"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          }
+        ]
       },
       {
         "tableName": "SportOccurrence",
@@ -224,7 +267,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '070409ce6de38eeeed42d1731498e2d8')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'a8340def5fc4f1cbab3c125b034d9bee')"
     ]
   }
 }
