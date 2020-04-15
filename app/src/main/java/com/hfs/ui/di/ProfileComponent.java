@@ -1,5 +1,6 @@
 package com.hfs.ui.di;
 
+import com.hfs.ui.ActivityHistoryPopupActivity;
 import com.hfs.ui.fragments.ActivityHistoryFragment;
 import com.hfs.ui.fragments.AddFoodItemFragment;
 import com.hfs.ui.fragments.FoodHistoryFragment;
@@ -15,6 +16,8 @@ public interface ProfileComponent {
     void inject(ActivityHistoryFragment activityHistoryFragment);
 
     void inject(FoodHistoryFragment foodHistoryFrag);
+
+    void inject(ActivityHistoryPopupActivity activityHistoryPopupActivity);
 
     @Component.Builder
     interface Builder{
