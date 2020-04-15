@@ -14,9 +14,12 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.hfs.lib.activity.FinishedActivity;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -25,12 +28,20 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     private static final String TAG = "RecyclerViewAdapter";
 
+    private final Map<String, String> activityNameToUrl;
+
     private List<FinishedActivity> activities;
     final private Context context;
 
     public RecyclerViewAdapter(Context context, List<FinishedActivity> activities){
         this.activities = activities;
         this.context = context;
+        this.activityNameToUrl = new HashMap<>();
+
+        this.activityNameToUrl.put("Running", "https://f1.pngfuel.com/png/797/224/38/running-logo-sports-exercise-rabbit-line-text-hand-symbol-png-clip-art.png");
+        this.activityNameToUrl.put("Swimming", "https://p7.hiclipart.com/preview/682/795/608/swimming-at-the-summer-olympics-olympic-games-olympic-symbols-sport-swimming.jpg");
+        this.activityNameToUrl.put("Climbin", "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSjKyDdlUKL5HT-i75J1FjneMwxBgUh8x359M1n_tW28LVzt3o6");
+        this.activityNameToUrl.put("Cycling", "https://webstockreview.net/images/cycling-clipart-symbol.jpg");
     }
 
     @NonNull
@@ -48,15 +59,16 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
         final FinishedActivity finishedActivity = activities.get(position); //Transfer the position to the pop-up (look at link) .toString()
 
-        // TODO: Add images.
-        /*
-        Glide.with(context)
-                .asBitmap()
-                .load(mImages.get(position))
-                .into(holder.image);
-        */
+        final String activityName = finishedActivity.getActivity().getName();
 
-        holder.name.setText(finishedActivity.getActivity().getName());
+        if(this.activityNameToUrl.containsKey(activityName)) {
+            Glide.with(context)
+                    .asBitmap()
+                    .load(activityNameToUrl.get(activityName))
+                    .into(holder.image);
+        }
+
+        holder.name.setText(activityName);
 
         // Shows start times of each activity.
         holder.date.setText(finishedActivity.getStart().toString());
@@ -67,9 +79,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
            public void onClick(View view) {
                final Random rand = new Random();
                Log.d(TAG, "onClick: clicked on: " + finishedActivity.toString());
-               //===============================================================================
-               //CODE HERE WHAT YOU WOULD LIKE THE APP TO DO ON CLICK OF THE SPECIFIC ACTIVITY_HISTORY ITEM.
-               //===============================================================================
 
                //Passing 'finishedActivity' object to popup activity from Activity History tab.
 
@@ -77,8 +86,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                bundle.putBinder("object_value", new ObjectWrapperForBinder(finishedActivity));
                //Adding the popup window on click on activity.
                context.startActivity(new Intent(context, ActivityHistoryPopupActivity.class).putExtras(bundle));
-
-               Toast.makeText(context, finishedActivity.toString(), Toast.LENGTH_SHORT).show();
            }
         });
     }
