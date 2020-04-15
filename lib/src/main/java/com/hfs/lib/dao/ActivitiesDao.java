@@ -56,13 +56,13 @@ public abstract class ActivitiesDao {
             "WHERE userId = :userId")
     public abstract List<FinishedActivity> loadFinishedActivities(long userId);
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     public abstract void insert(FinishedActivity... finishedActivity);
 
     @Update
     public abstract void updateFinishedActivity(FinishedActivity finishedActivity);
 
-    @Update
+    @Delete
     public abstract void delete(FinishedActivity finishedActivity);
 
     @Query("SELECT finishedActivity.* FROM finishedActivity " +
@@ -77,7 +77,7 @@ public abstract class ActivitiesDao {
     @Query("SELECT * FROM unfinishedactivity WHERE userId = :id")
     public abstract List<UnfinishedActivity> loadUnfinishedActivities(long id);
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     public abstract long[] insert(UnfinishedActivity... unfinishedActivity);
 
     @Update

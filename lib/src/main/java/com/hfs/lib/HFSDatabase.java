@@ -31,7 +31,9 @@ import com.hfs.lib.repo.Consumables;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import java.util.Random;
+import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 @Database(entities = {
         Activity.class,
@@ -98,8 +100,8 @@ public abstract class HFSDatabase extends RoomDatabase {
                 Goal.GAIN_MUSCLE_MASS
         );
 
-        final long profileId = this.standardProfileDao().insertStandardProfile(profile);
-        profile.setStandardProfileId(profileId);
+        this.standardProfileDao().insertStandardProfile(profile);
+
 
         final Fitness fitness = new Fitness(this.activitiesDao(), profile);
         profile.setFitness(fitness);
@@ -134,6 +136,7 @@ public abstract class HFSDatabase extends RoomDatabase {
         });
 
         profile.consume(consumables.getConsumable("Pizza"), 101);
+        Log.d("DB ---------------", "Filled");
     }
 
     public static synchronized HFSDatabase getInstance(Context context) {
@@ -143,13 +146,17 @@ public abstract class HFSDatabase extends RoomDatabase {
                     HFSDatabase.class, "hfs")
                     .allowMainThreadQueries()
                     .fallbackToDestructiveMigration()
+                    .build();
+            /*
                     .addCallback(new Callback() {
                         @Override
                         public void onCreate(@NonNull SupportSQLiteDatabase db) {
                             super.onCreate(db);
                             Executors.newSingleThreadExecutor().execute(() -> getInstance(context).prePopulate());
                         }
-                    }).build();
+                   }).build();
+             */
+            instance.prePopulate();
         }
 
         return instance;

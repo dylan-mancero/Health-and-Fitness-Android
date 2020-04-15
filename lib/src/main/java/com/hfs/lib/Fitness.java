@@ -66,7 +66,12 @@ public class Fitness{
 		}
 		this.caloriesBurned += caloriesBurned;
 
+		long id = this.activitiesDao.insert(activity.getUnfinishedActivity())[0];
+		activity.getUnfinishedActivity().id = id;
+		activity.unfinishedActivityId = id;
 		this.activitiesDao.insert(activity);
+
+		this.activities.add(activity);
 	}
 
 	public void addActivitySession(Activity activity, OffsetDateTime startTime, OffsetDateTime endTime){
@@ -76,7 +81,10 @@ public class Fitness{
 		unfinishedActivity.id = unfinishedActivityId;
 
 		final FinishedActivity finishedActivity = new FinishedActivity(unfinishedActivity, endTime);
-		this.addActivitySession(finishedActivity);
+		finishedActivity.unfinishedActivityId = unfinishedActivityId;
+
+		this.activitiesDao.insert(finishedActivity);
+
 		this.activities.add(finishedActivity);
 	}
 

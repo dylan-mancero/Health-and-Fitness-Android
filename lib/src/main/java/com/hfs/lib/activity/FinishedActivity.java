@@ -32,7 +32,7 @@ public class FinishedActivity implements ReportableStrategy {
 	private final Duration duration;
 	@Ignore
 	private UnfinishedActivity unfinishedActivity;
-	private final long unfinishedActivityId;
+	public long unfinishedActivityId;
 	@Ignore
 	private ActivityOccurrence activityOccurrence;
 

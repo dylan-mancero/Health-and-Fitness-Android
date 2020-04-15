@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.NumberPicker;
@@ -17,6 +18,7 @@ import androidx.fragment.app.Fragment;
 import com.google.firebase.auth.FirebaseAuth;
 import com.hfs.lib.StandardProfile;
 import com.hfs.lib.activity.Activity;
+import com.hfs.lib.activity.UnfinishedActivity;
 import com.hfs.lib.repo.Activities;
 import com.hfs.ui.GoalBtnPopupActivity;
 import com.hfs.ui.HFSApplication;
@@ -104,7 +106,7 @@ public class HomeFragment extends Fragment {
         this.progressBar = fragmentView.findViewById(R.id.progressBar);
 
         final Button activityNormalBtn = fragmentView.findViewById(R.id.activityBtn);
-        activityBtn = new ActivityButton(this, activityNormalBtn, hhPicker, mmPicker, ssPicker);
+        activityBtn = new ActivityButton(this, activityNormalBtn, activitySpinner, hhPicker, mmPicker, ssPicker);
 
         return fragmentView;
     }
@@ -118,14 +120,28 @@ public class HomeFragment extends Fragment {
             START, STOP
         }
         private State state;
+        private String activityName;
 
         ActivityTask activityTask;
 
-        private ActivityButton(HomeFragment homeFragment, Button button, NumberPicker hhPicker, NumberPicker mmPicker, NumberPicker ssPicker) {
+        private ActivityButton(HomeFragment homeFragment, Button button, Spinner activitySpinner, NumberPicker hhPicker, NumberPicker mmPicker, NumberPicker ssPicker) {
             this.homeFragment = homeFragment;
 
             this.button = button;
             button.setOnClickListener(this);
+
+            activitySpinner = activitySpinner;
+            activitySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    activityName = (String) parent.getItemAtPosition(position);
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+                    activityName = (String) parent.getItemAtPosition(0);
+                }
+            });
 
             this.hhPicker = hhPicker;
             this.mmPicker = mmPicker;
@@ -149,7 +165,7 @@ public class HomeFragment extends Fragment {
                         .plus(mmPicker.getValue(), ChronoUnit.MINUTES)
                         .plus(ssPicker.getValue(), ChronoUnit.SECONDS);
 
-                activityTask = new ActivityTask(this.homeFragment, this, duration);
+                activityTask = new ActivityTask(this.homeFragment, this, duration, homeFragment.activities.getActivity(activityName));
                 activityTask.execute();
 
             } else {
@@ -163,11 +179,16 @@ public class HomeFragment extends Fragment {
         }
     }
 
-    private static class ActivityTask extends AsyncTask<Void, Integer, Void> {
-        final WeakReference<HomeFragment> homeFragmentWeakReference;
-        final ActivityButton button;
-        final Duration activityDuration;
-        final int progressMax;
+    public static class ActivityTask extends AsyncTask<Void, Integer, Void> {
+        private final WeakReference<HomeFragment> homeFragmentWeakReference;
+        private final ActivityButton button;
+        private final Duration activityDuration;
+        private final int progressMax;
+
+        private final Activity activity;
+        private UnfinishedActivity unfinishedActivity;
+
+        @Inject StandardProfile profile;
 
         final static Function<WeakReference<HomeFragment>, HomeFragment> getHardReference = (weakReferance) -> {
             final HomeFragment homeFragment = weakReferance.get();
@@ -177,11 +198,17 @@ public class HomeFragment extends Fragment {
             return homeFragment;
         };
 
-        private ActivityTask(HomeFragment homeFragment, ActivityButton button, Duration activityDuration) {
-            homeFragmentWeakReference = new WeakReference<>(homeFragment);
+        private ActivityTask(HomeFragment homeFragment, ActivityButton button, Duration activityDuration, Activity activity) {
+            this.homeFragmentWeakReference = new WeakReference<>(homeFragment);
             this.activityDuration = activityDuration;
             this.button = button;
-            progressMax = Math.toIntExact(activityDuration.toMillis());
+            this.progressMax = Math.toIntExact(activityDuration.toMillis());
+            this.activity = activity;
+
+            DaggerProfileComponent.builder()
+                    .appComponent(((HFSApplication) homeFragment.getActivity().getApplication()).getAppComponent())
+                    .build().inject(this);
+
         }
 
         @Override
@@ -196,6 +223,8 @@ public class HomeFragment extends Fragment {
 
             progressBar.setMax(progressMax);
             progressBar.setVisibility(View.VISIBLE);
+
+            this.unfinishedActivity = profile.startActivitySession(this.activity);
         }
 
         @Override
@@ -257,6 +286,9 @@ public class HomeFragment extends Fragment {
             if(homeFragment == null){
                 return;
             }
+
+            this.profile.addPastActivitySession(this.unfinishedActivity.end());
+
             final ProgressBar progressBar = homeFragment.progressBar;
 
             progressBar.setVisibility(View.INVISIBLE);

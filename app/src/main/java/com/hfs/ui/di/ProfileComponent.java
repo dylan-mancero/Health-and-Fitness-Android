@@ -22,6 +22,8 @@ public interface ProfileComponent {
 
     void inject(ActivityHistoryPopupActivity activityHistoryPopupActivity);
 
+    void inject(HomeFragment.ActivityTask activityTask);
+
     @Component.Builder
     interface Builder{
 
