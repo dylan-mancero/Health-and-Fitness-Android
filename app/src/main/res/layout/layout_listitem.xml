@@ -20,7 +20,7 @@
         android:layout_marginLeft="30dp"
         android:layout_toRightOf="@+id/image"
         android:text="TestingPosition"
-        android:textColor="#000000"
+        android:textColor="@color/fireOrange"
         android:textSize="18sp"
         android:textStyle="bold" />
 
@@ -32,6 +32,6 @@
         android:layout_marginLeft="30dp"
         android:layout_toRightOf="@+id/image"
         android:text="Date: xx.xx.xx"
-        android:textColor="#000000"
+        android:textColor="@color/fireOrange"
         android:textStyle="bold" />
 </RelativeLayout>

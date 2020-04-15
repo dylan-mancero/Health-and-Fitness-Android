@@ -2,6 +2,7 @@ package com.hfs.ui;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -45,7 +46,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Log.d(TAG, "onBindViewHolder: called.");
 
-        final FinishedActivity finishedActivity = activities.get(position);
+        final FinishedActivity finishedActivity = activities.get(position); //Transfer the position to the pop-up (look at link) .toString()
 
         // TODO: Add images.
         /*
@@ -70,8 +71,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                //CODE HERE WHAT YOU WOULD LIKE THE APP TO DO ON CLICK OF THE SPECIFIC ACTIVITY_HISTORY ITEM.
                //===============================================================================
 
+               //Passing 'finishedActivity' object to popup activity from Activity History tab.
+
+               final Bundle bundle = new Bundle();
+               bundle.putBinder("object_value", new ObjectWrapperForBinder(finishedActivity));
                //Adding the popup window on click on activity.
-               context.startActivity(new Intent(context, ActivityHistoryPopupActivity.class));
+               context.startActivity(new Intent(context, ActivityHistoryPopupActivity.class).putExtras(bundle));
 
                Toast.makeText(context, finishedActivity.toString(), Toast.LENGTH_SHORT).show();
            }

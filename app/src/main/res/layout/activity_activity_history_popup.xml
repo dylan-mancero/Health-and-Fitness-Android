@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/constraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/extremelyLightGrey">
+    android:background="@color/darkNavyBlue">
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/image"
@@ -23,10 +24,10 @@
         android:layout_width="130dp"
         android:layout_height="wrap_content"
         android:allowUndo="false"
-        android:background="@drawable/login_rounded_button"
+        android:background="@color/darkNavyBlue"
         android:gravity="center"
-        android:text="Report"
-        android:textColor="@color/colorWhite"
+        android:text="ActivityName"
+        android:textColor="@color/fireOrange"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -83,5 +84,44 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/label_Duration"
         app:layout_constraintVertical_bias="0.057" />
+
+    <TextView
+        android:id="@+id/fill_CaloriesBurnt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:textColor="@color/fireOrange"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.267"
+        app:layout_constraintStart_toEndOf="@+id/label_CaloriesBurnt"
+        app:layout_constraintTop_toBottomOf="@+id/label_Report"
+        app:layout_constraintVertical_bias="0.148" />
+
+    <TextView
+        android:id="@+id/fill_Duration"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:textColor="@color/fireOrange"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.267"
+        app:layout_constraintStart_toEndOf="@+id/label_Duration"
+        app:layout_constraintTop_toBottomOf="@+id/fill_CaloriesBurnt"
+        app:layout_constraintVertical_bias="0.175" />
+
+    <TextView
+        android:id="@+id/fill_Time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:textColor="@color/fireOrange"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.267"
+        app:layout_constraintStart_toEndOf="@+id/label_Time"
+        app:layout_constraintTop_toBottomOf="@+id/fill_Duration"
+        app:layout_constraintVertical_bias="0.222" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

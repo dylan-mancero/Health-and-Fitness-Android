@@ -20,8 +20,6 @@ public interface ProfileComponent {
 
     void inject(FoodHistoryFragment foodHistoryFrag);
 
-    void inject(ActivityHistoryPopupActivity activityHistoryPopupActivity);
-
     void inject(HomeFragment.ActivityTask activityTask);
 
     @Component.Builder
@@ -32,6 +30,5 @@ public interface ProfileComponent {
         ProfileComponent build();
 
     }
-
 
 }

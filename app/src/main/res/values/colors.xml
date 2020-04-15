@@ -6,5 +6,6 @@
     <color name="colorWhite">#ffffff</color>
     <color name="colorWhiteTransparent">#80ffff</color>
     <color name="extremelyLightGrey">#eeeeee</color>
-    <color name="fireOrange">#FF7900</color>
+    <color name="fireOrange">#FF9523</color>
+    <color name="darkNavyBlue">#1E3143</color>
 </resources>
