@@ -7,7 +7,6 @@ import android.util.DisplayMetrics;
 import androidx.annotation.Nullable;
 
 import com.hfs.lib.StandardProfile;
-import com.hfs.ui.di.DaggerProfileComponent;
 
 import javax.inject.Inject;
 
@@ -18,12 +17,12 @@ public class ActivityHistoryPopupActivity extends Activity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+/*
         DaggerProfileComponent.builder()
                 .appComponent(((HFSApplication) getApplication()).getAppComponent())
                 .build()
                 .inject(this);
-
+*/
 
         //Linking 'activity_activity_history_popupactivity_history_popup.xml' to this java class.
         setContentView(R.layout.activity_activity_history_popup);

@@ -6,6 +6,7 @@ import android.util.Log;
 import com.hfs.lib.HFSDatabase;
 import com.hfs.lib.StandardProfile;
 import com.hfs.lib.repo.Activities;
+import com.hfs.lib.repo.Consumables;
 import com.hfs.ui.di.AppComponent;
 import com.hfs.ui.di.DaggerAppComponent;
 import com.hfs.ui.di.ProfileModule;
@@ -29,7 +30,7 @@ public class HFSApplication extends Application {
             appComponent = DaggerAppComponent
                     .builder()
                     .profileModule(ProfileModule.getInstance(standardProfile))
-                    .repoModule(RepoModule.getInstance(Activities.getInstance(this)))
+                    .repoModule(RepoModule.getInstance(Activities.getInstance(this), Consumables.getInstance(this)))
                     .build();
         }
 

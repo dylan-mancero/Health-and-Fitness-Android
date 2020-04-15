@@ -4,6 +4,7 @@ import com.hfs.ui.ActivityHistoryPopupActivity;
 import com.hfs.ui.fragments.ActivityHistoryFragment;
 import com.hfs.ui.fragments.AddFoodItemFragment;
 import com.hfs.ui.fragments.FoodHistoryFragment;
+import com.hfs.ui.fragments.HomeFragment;
 
 import dagger.Component;
 
@@ -14,6 +15,8 @@ public interface ProfileComponent {
     void inject(AddFoodItemFragment addFoodItemFragment);
 
     void inject(ActivityHistoryFragment activityHistoryFragment);
+
+    void inject(HomeFragment homeFragment);
 
     void inject(FoodHistoryFragment foodHistoryFrag);
 
@@ -27,5 +30,6 @@ public interface ProfileComponent {
         ProfileComponent build();
 
     }
+
 
 }

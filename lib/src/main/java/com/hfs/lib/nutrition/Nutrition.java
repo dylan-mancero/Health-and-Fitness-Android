@@ -1,25 +1,64 @@
 package com.hfs.lib.nutrition;
 
+import android.app.Application;
+
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
+
+import com.hfs.lib.HFSDatabase;
+import com.hfs.lib.StandardProfile;
+import com.hfs.lib.dao.ConsumablesDao;
+import com.hfs.lib.repo.Consumables;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class Nutrition {
 
-	private double protein;
-	private double carbs;
-	private double calories;
-	private double sugar;
+	private static Nutrition instance;
 
-	private List<ConsumableOccurance> consumables = new ArrayList<>();
-	private final Allergy[] allergies;
+	private final ConsumablesDao consumablesDao;
 
-	public Nutrition(double protein, double carbs, double calories, double sugar, Allergy[] allergies) {
-		this.protein = protein;
-		this.carbs = carbs;
-		this.calories = calories;
-		this.sugar = sugar;
-		this.allergies = allergies;
+	private double protein = 0;
+	private double carbs = 0;
+	private double calories = 0;
+	private double sugar = 0;
+
+	private final List<ConsumableOccurrence> consumables;
+	private MutableLiveData<List<ConsumableOccurrence>> consumablesLiveData;
+
+	private final StandardProfile standardProfile;
+
+	// TODO: Implement allergies.
+	//private final Allergy[] allergies;
+
+
+	/**
+	 * Only for Room.
+	 * @param consumablesDao
+	 * @param standardProfile
+	 */
+	@Deprecated
+	public Nutrition(ConsumablesDao consumablesDao, StandardProfile standardProfile) {
+		this.standardProfile = standardProfile;
+		this.consumablesDao = consumablesDao;
+		this.consumables = consumablesDao.loadConsumableOccurrences(standardProfile.getStandardProfileId());
+		this.consumables.forEach(consumable -> consumable.init(new Consumables(consumablesDao)));
+	}
+
+	private Nutrition(Application application, StandardProfile standardProfile){
+		this(HFSDatabase.getInstance(application).consumablesDao(), standardProfile);
+		this.consumablesLiveData = new MutableLiveData<>(this.consumables);
+	}
+
+	public static synchronized Nutrition getInstance(Application application, StandardProfile standardProfile){
+		if(instance == null){
+			HFSDatabase db = HFSDatabase.getInstance(application);
+			instance = new Nutrition(db.consumablesDao(), standardProfile);
+		}
+
+		return instance;
 	}
 
 	/**
@@ -32,6 +71,7 @@ public class Nutrition {
 			throw new IllegalArgumentException(consumable.getName() + " consumed cannot be: " + amount + " g\nExpected more than 0g.");
 		}
 
+		/* TODO: Uncomment when Allergies implemented
 		if(this.allergies != null){
 			final List<Allergy> userAllergies = Arrays.asList(this.allergies);
 			final boolean itemContainsAllergies = Arrays.stream(consumable.getAllergies())
@@ -41,13 +81,15 @@ public class Nutrition {
 				throw new IllegalArgumentException(consumable.getName() + " contains one or many allergen to which the user is allergic.");
 			}
 		}
+		 */
 
-		final ConsumableOccurance consumedItem = new ConsumableOccurance(consumable, amount);
+		final ConsumableOccurrence consumedItem = new ConsumableOccurrence(consumable, amount, standardProfile);
+		this.consumablesDao.insert(consumedItem);
         this.consumables.add(consumedItem);
         this.update(consumedItem);
 	}
 
-	private void update(ConsumableOccurance consumedItem) {
+	private void update(ConsumableOccurrence consumedItem) {
 		final double amountConsumed = consumedItem.getAmount();
 		final Consumable itemConsumed = consumedItem.getConsumable();
 
@@ -57,8 +99,8 @@ public class Nutrition {
 		this.sugar = itemConsumed.getSugar() * amountConsumed;
 	}
 
-	public ConsumableOccurance[] getConsumables() {
-		return this.consumables.toArray(new ConsumableOccurance[this.consumables.size()]);
+	public LiveData<List<ConsumableOccurrence>> getConsumables() {
+		return this.consumablesLiveData;
 	}
 
 	public double getProtein() {

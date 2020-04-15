@@ -103,7 +103,6 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void initialiseStandardProfile(){
-        // TODO: Initialise properly.
         final HFSApplication app = (HFSApplication) getApplication();
         final HFSDatabase db = app.getDatabase();
         db.dump();

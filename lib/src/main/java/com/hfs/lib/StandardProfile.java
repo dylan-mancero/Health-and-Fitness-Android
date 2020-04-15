@@ -10,7 +10,7 @@ import com.hfs.lib.activity.Activity;
 import com.hfs.lib.activity.UnfinishedActivity;
 import com.hfs.lib.activity.FinishedActivity;
 import com.hfs.lib.nutrition.Consumable;
-import com.hfs.lib.nutrition.ConsumableOccurance;
+import com.hfs.lib.nutrition.ConsumableOccurrence;
 import com.hfs.lib.nutrition.Nutrition;
 import com.hfs.lib.typeconverters.GoalConverter;
 
@@ -175,7 +175,7 @@ public class StandardProfile {
 	    return this.nutrition;
 	}
 
-	public ConsumableOccurance[] getConsumption() {
+	public LiveData<List<ConsumableOccurrence>> getConsumption() {
 	    return this.nutrition.getConsumables();
 	}
 

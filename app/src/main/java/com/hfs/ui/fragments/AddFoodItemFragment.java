@@ -25,7 +25,10 @@ import com.hfs.ui.HFSApplication;
 import com.hfs.ui.R;
 import com.hfs.ui.di.DaggerProfileComponent;
 
+import java.util.List;
+
 import javax.inject.Inject;
+import javax.inject.Named;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -33,9 +36,8 @@ import javax.inject.Inject;
 public class AddFoodItemFragment extends Fragment {
     private static final String TAG = "AddFoodItemFragment";
 
-    @Inject
-    StandardProfile profile;
-
+    @Inject StandardProfile profile;
+    @Inject Consumables consumables;
 
     public AddFoodItemFragment() {
         // Required empty public constructor
@@ -56,8 +58,7 @@ public class AddFoodItemFragment extends Fragment {
         String [] values = new String [6];
 
         int count = 0;
-        Consumables foodDB = Consumables.getInstance();
-        for( Consumable i :foodDB.getConsumables()){
+        for( Consumable i : consumables.getConsumables()){
             values[count]=i.getName();
             count++;
 

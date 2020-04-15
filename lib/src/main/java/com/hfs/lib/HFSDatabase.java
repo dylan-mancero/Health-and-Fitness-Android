@@ -18,22 +18,39 @@ import com.hfs.lib.activity.Sport;
 import com.hfs.lib.activity.SportOccurrence;
 import com.hfs.lib.activity.UnfinishedActivity;
 import com.hfs.lib.dao.ActivitiesDao;
+import com.hfs.lib.dao.ConsumablesDao;
 import com.hfs.lib.dao.StandardProfileDao;
+import com.hfs.lib.nutrition.Allergy;
+import com.hfs.lib.nutrition.Consumable;
+import com.hfs.lib.nutrition.ConsumableOccurrence;
+import com.hfs.lib.nutrition.ConsumableType;
+import com.hfs.lib.nutrition.Nutrition;
 import com.hfs.lib.repo.Activities;
+import com.hfs.lib.repo.Consumables;
 
-import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Random;
 import java.util.concurrent.Executors;
 
-@Database(entities = {Activity.class, Exercise.class, Sport.class, StandardProfile.class, UnfinishedActivity.class, FinishedActivity.class, SportOccurrence.class, ExerciseOccurrence.class}, version = 1)
+@Database(entities = {
+        Activity.class,
+        Exercise.class,
+        Sport.class,
+        StandardProfile.class,
+        UnfinishedActivity.class,
+        FinishedActivity.class,
+        SportOccurrence.class,
+        ExerciseOccurrence.class,
+        Consumable.class,
+        ConsumableOccurrence.class
+}, version = 1)
 public abstract class HFSDatabase extends RoomDatabase {
     private static HFSDatabase instance;
 
     public abstract ActivitiesDao activitiesDao();
+
+    public abstract ConsumablesDao consumablesDao();
 
     public abstract StandardProfileDao standardProfileDao();
 
@@ -53,6 +70,16 @@ public abstract class HFSDatabase extends RoomDatabase {
                 new Exercise("Plank")
         };
         activitiesDao().insert(dummyExercises);
+
+        final Consumable[] dummyConsumables = new Consumable[]{
+                new Consumable("Pizza", 100, 100, 100, 100, ConsumableType.FOOD),
+                new Consumable("Pasta", 101, 101,101, 101, ConsumableType.FOOD),
+                new Consumable("Baked Beans", 102, 102, 102, 102, ConsumableType.FOOD),
+                new Consumable("Eggs", 103, 103, 103, 103, ConsumableType.FOOD),
+                new Consumable("Milk", 104, 104, 104, 104, ConsumableType.DRINK),
+                new Consumable("Orange Juice", 105, 105, 105, 105, ConsumableType.DRINK)
+        };
+        consumablesDao().insert(dummyConsumables);
     }
 
     public void prePopulate(){
@@ -62,6 +89,7 @@ public abstract class HFSDatabase extends RoomDatabase {
         // TODO: Consumables
 
         final Activities activities = new Activities(activitiesDao());
+        final Consumables consumables = new Consumables(consumablesDao());
 
         final StandardProfile profile = new StandardProfile(1,
                 StandardProfile.SHARING,
@@ -77,6 +105,8 @@ public abstract class HFSDatabase extends RoomDatabase {
         profile.setFitness(fitness);
         final Schedule schedule = new Schedule(this.activitiesDao(), profile);
         profile.setSchedule(schedule);
+        final Nutrition nutrition = new Nutrition(this.consumablesDao(), profile);
+        profile.setNutrition(nutrition);
 
         final Random rand = new Random();
 
@@ -102,6 +132,8 @@ public abstract class HFSDatabase extends RoomDatabase {
                             rand.nextInt(60),
                             0, 0, ZoneOffset.UTC));
         });
+
+        profile.consume(consumables.getConsumable("Pizza"), 101);
     }
 
     public static synchronized HFSDatabase getInstance(Context context) {
@@ -120,7 +152,6 @@ public abstract class HFSDatabase extends RoomDatabase {
                     }).build();
         }
 
-
         return instance;
     }
 
@@ -137,6 +168,14 @@ public abstract class HFSDatabase extends RoomDatabase {
             Log.d("ACT: ", act.getName());
         });
 
+        this.consumablesDao().loadConsumables().forEach(consumable-> {
+            Log.d("CON: ", consumable.getName());
+        });
+
+        this.consumablesDao().loadConsumableOccurrences(1).forEach( consumed -> {
+            Log.d("CONSUMED: ", consumed.getConsumableName() + " " + consumed.getAmount() + " " + consumed.getDate().toString());
+        });
+
         Activities activities = new Activities(this.activitiesDao());
         activities.getActivities().forEach(a -> { Log.d("EX/SPT: ", a.getName());});
 
@@ -147,6 +186,7 @@ public abstract class HFSDatabase extends RoomDatabase {
         final StandardProfile profile = standardProfileDao().getStandardProfile(id);
 
         profile.setFitness(new Fitness(app, profile));
+        profile.setNutrition(Nutrition.getInstance(app, profile));
 
         return profile;
     }
