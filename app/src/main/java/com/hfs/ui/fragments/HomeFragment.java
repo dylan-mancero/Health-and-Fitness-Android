@@ -17,6 +17,7 @@ import androidx.fragment.app.Fragment;
 import com.google.firebase.auth.FirebaseAuth;
 import com.hfs.lib.StandardProfile;
 import com.hfs.lib.activity.Activity;
+import com.hfs.ui.GoalBtnPopupActivity;
 import com.hfs.ui.HFSApplication;
 import com.hfs.ui.LoginActivity;
 import com.hfs.ui.R;
@@ -65,6 +66,14 @@ public class HomeFragment extends Fragment {
         // TODO: Set goal button text.
         final Button goalBtn = fragmentView.findViewById(R.id.goalBtn);
         //goalBtn.setText(profile.getGoal().name());
+
+        //Adding popup window to goalBtn
+        goalBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getContext(), GoalBtnPopupActivity.class));
+            }
+        });
 
         final Button logoutBtn = fragmentView.findViewById(R.id.logoutBtn);
         logoutBtn.setOnClickListener(v -> {

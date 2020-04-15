@@ -30,6 +30,11 @@
             android:theme="@style/AppTheme.CustomTheme" >
         </activity>
 
+        <activity
+            android:name=".GoalBtnPopupActivity"
+            android:theme="@style/AppTheme.CustomTheme" >
+        </activity>
+
     </application>
 
 </manifest>

@@ -5,8 +5,7 @@
     android:id="@+id/constraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginBottom="56dp"
-    android:background="@color/colorWhiteTransparent">
+    android:background="@color/extremelyLightGrey">
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/image"
@@ -24,9 +23,11 @@
         android:layout_width="130dp"
         android:layout_height="wrap_content"
         android:allowUndo="false"
-        android:background="@color/colorPrimary"
+        android:background="@drawable/login_rounded_button"
         android:gravity="center"
         android:text="Report"
+        android:textColor="@color/colorWhite"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -40,6 +41,8 @@
         android:layout_marginTop="68dp"
         android:allowUndo="false"
         android:text="Calories Burnt: "
+        android:textColor="@color/fireOrange"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.143"
@@ -55,6 +58,8 @@
         android:layout_marginTop="56dp"
         android:allowUndo="false"
         android:text="Duration: "
+        android:textColor="@color/fireOrange"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.143"
@@ -70,11 +75,13 @@
         android:layout_marginTop="52dp"
         android:allowUndo="false"
         android:text="Time of Day: "
+        android:textColor="@color/fireOrange"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.143"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/label_Duration"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.057" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
