@@ -54,8 +54,7 @@ public class Nutrition {
 
 	public static synchronized Nutrition getInstance(Application application, StandardProfile standardProfile){
 		if(instance == null){
-			HFSDatabase db = HFSDatabase.getInstance(application);
-			instance = new Nutrition(db.consumablesDao(), standardProfile);
+			instance = new Nutrition(application, standardProfile);
 		}
 
 		return instance;
