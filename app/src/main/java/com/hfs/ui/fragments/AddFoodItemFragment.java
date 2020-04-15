@@ -17,6 +17,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.hfs.lib.StandardProfile;
 import com.hfs.lib.nutrition.Consumable;
@@ -105,21 +106,40 @@ public class AddFoodItemFragment extends Fragment {
         confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FoodHistoryFragment frag = new FoodHistoryFragment();
 
 
 
+                if(spinner.getSelectedItemPosition() == 0| amount.getText()==null){
+                    Toast.makeText(getActivity(),"Please select a food yo", Toast.LENGTH_SHORT).show();
+                }
+                else {
 
 
+                    try{
+                        String food = spinner.getSelectedItem().toString();
+                        double input = Double.parseDouble(amount.getText().toString());
+                        Toast.makeText(getActivity(),
+                                spinner.getSelectedItem() + " saved!", Toast.LENGTH_LONG).show();
 
+                        try {
+                            Log.d(TAG, "onClick: "+consumables.getConsumable(food).getName()+" is being eaten by "+profile+
+                                    " and he has input "+input+" amount");
+                            profile.getNutrition().addConsumable(consumables.getConsumable(food), input);
+                            Log.d(TAG, "onClick: "+profile.getNutrition().getConsumables());
+                        }catch(Exception e){
+                            Log.d(TAG, "onClick: "+e);
+                        }
 
+                        FoodHistoryFragment frag = new FoodHistoryFragment();
+                        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+                        fragmentTransaction.replace(R.id.main_frame, frag);
+                        fragmentTransaction.commit();
 
+                    }catch(Exception e){
+                        Toast.makeText(getActivity(),"food amount is invalid", Toast.LENGTH_SHORT).show();
+                    }
 
-
-
-                FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-                fragmentTransaction.replace(R.id.main_frame, frag);
-                fragmentTransaction.commit();
+                }
             }
         });
 

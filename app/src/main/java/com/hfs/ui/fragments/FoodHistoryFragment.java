@@ -30,10 +30,10 @@ import javax.inject.Inject;
 public class FoodHistoryFragment extends Fragment {
 
 
-    private static final String TAG ="FoodStuff ;";
-    private ArrayList<String> fAmounts = new ArrayList<>();
-    private ArrayList<String> fImageUrls = new ArrayList<>();
-    private ArrayList<String> fDates = new ArrayList<>();
+    private static final String TAG ="FoodHistoryFragment";
+    public ArrayList<String> fAmounts = new ArrayList<>();
+    public ArrayList<String> fImageUrls = new ArrayList<>();
+    public ArrayList<String> fDates = new ArrayList<>();
     private View fragment;
 
     @Inject StandardProfile profile;
@@ -57,6 +57,7 @@ public class FoodHistoryFragment extends Fragment {
         Log.d(TAG, "onCreateView: "+ profile);
 
         TextView protein = (TextView) view.findViewById(R.id.TxtViewProtein);
+        protein.setText(Integer.toString((int)profile.getNutrition().getProtein()));
 
        // double pro = profile.getNutrition().getProtein();
 
