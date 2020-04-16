@@ -9,11 +9,14 @@ import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.LiveData;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.hfs.lib.StandardProfile;
+import com.hfs.lib.nutrition.Consumable;
+import com.hfs.lib.nutrition.ConsumableOccurrence;
 import com.hfs.ui.FoodHistoryAdapter;
 import com.hfs.ui.HFSApplication;
 import com.hfs.ui.R;
@@ -21,6 +24,7 @@ import com.hfs.ui.di.DaggerProfileComponent;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -34,6 +38,7 @@ public class FoodHistoryFragment extends Fragment {
     public ArrayList<String> fAmounts = new ArrayList<>();
     public ArrayList<String> fImageUrls = new ArrayList<>();
     public ArrayList<String> fDates = new ArrayList<>();
+
     private View fragment;
 
     @Inject StandardProfile profile;
@@ -59,8 +64,18 @@ public class FoodHistoryFragment extends Fragment {
         TextView protein = (TextView) view.findViewById(R.id.TxtViewProtein);
         protein.setText(Integer.toString((int)profile.getNutrition().getProtein()));
 
-       // double pro = profile.getNutrition().getProtein();
+        try {
+            final LiveData<List<ConsumableOccurrence>> foodDB = profile.getNutrition().getConsumables();
+            List<ConsumableOccurrence> foodList = foodDB.getValue();
 
+            for (ConsumableOccurrence c : foodList) {
+                fDates.add(c.getDate().toString());
+                fAmounts.add(Double.toString(c.getAmount()));
+                fImageUrls.add("https://f1.pngfuel.com/png/263/325/196/food-icon-icon-design-meal-restaurant-dish-logo-line-art-symbol-png-clip-art.png");
+            }
+        }catch (Exception e){
+            Log.d(TAG, "onCreateView: "+ e);
+        }
 
         initImageBitmaps();
         initFoodRecyclerView();

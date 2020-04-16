@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.LiveData;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -21,6 +22,7 @@ import android.widget.Toast;
 
 import com.hfs.lib.StandardProfile;
 import com.hfs.lib.nutrition.Consumable;
+import com.hfs.lib.nutrition.ConsumableOccurrence;
 import com.hfs.lib.repo.Consumables;
 import com.hfs.ui.HFSApplication;
 import com.hfs.ui.R;
@@ -125,7 +127,9 @@ public class AddFoodItemFragment extends Fragment {
                             Log.d(TAG, "onClick: "+consumables.getConsumable(food).getName()+" is being eaten by "+profile+
                                     " and he has input "+input+" amount");
                             profile.getNutrition().addConsumable(consumables.getConsumable(food), input);
-                            Log.d(TAG, "onClick: "+profile.getNutrition().getConsumables());
+
+
+
                         }catch(Exception e){
                             Log.d(TAG, "onClick: "+e);
                         }
