@@ -6,6 +6,11 @@
     <color name="colorWhite">#ffffff</color>
     <color name="colorWhiteTransparent">#80ffff</color>
     <color name="extremelyLightGrey">#eeeeee</color>
-    <color name="fireOrange">#FF9523</color>
+    <color name="headingGrey">#838181</color>
+    <color name="fireOrange">#FF6D00</color>
     <color name="darkNavyBlue">#1E3143</color>
+    <color name="background">#ffffff</color>
+    <color name="navBarBackgroud">#FF6D00</color>
+    <color name="navItemSelected">#eeeeeeee</color>
+    <color name="navItem">#ffffffff</color>
 </resources>

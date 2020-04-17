@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/background"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -10,41 +11,40 @@
         android:id="@+id/foodSpinneroo"
         android:layout_width="200dp"
         android:layout_height="50dp"
+        android:background="@drawable/orange_gradient_outline_button"
         android:gravity="center_horizontal"
         android:hint="Search Food"
-        android:background="@drawable/login_rounded_button"
         android:spinnerMode="dialog"
         android:textColor="#080808"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.138" />
+        app:layout_constraintTop_toBottomOf="@+id/FoodTextView"
+        app:layout_constraintVertical_bias="0.063" />
 
     <TextView
         android:id="@+id/FoodTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:allowUndo="false"
-        android:background="@drawable/login_rounded_button"
         android:ems="10"
         android:gravity="center"
         android:text="Add a Food or Drink"
-        android:textColor="@color/colorWhite"
+        android:textColor="@color/headingGrey"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.044" />
+        app:layout_constraintVertical_bias="0.061" />
 
     <TextView
         android:id="@+id/gramMilText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="g."
+        android:textColor="@color/fireOrange"
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/BtnConfirmAddFood"
         app:layout_constraintEnd_toEndOf="parent"
@@ -60,6 +60,7 @@
         android:layout_marginTop="76dp"
         android:hint="amount here"
         android:inputType="number"
+        android:textColor="@color/fireOrange"
         app:layout_constraintBottom_toTopOf="@+id/BtnConfirmAddFood"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.516"
@@ -69,14 +70,15 @@
 
     <Button
         android:id="@+id/BtnConfirmAddFood"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="260dp"
+        android:layout_height="49dp"
+        android:background="@drawable/orange_gradient_button"
         android:text="Add this tasty thing"
+        android:textColor="@color/colorWhite"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.565" />
+        app:layout_constraintTop_toBottomOf="@+id/foodSpinneroo" />
 </androidx.constraintlayout.widget.ConstraintLayout>

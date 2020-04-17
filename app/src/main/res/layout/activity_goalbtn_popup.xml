@@ -5,7 +5,7 @@
     android:id="@+id/constraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/darkNavyBlue">
+    android:background="@drawable/popup_background">
 
     <TextView
         android:id="@+id/goal_caloriesLeft"
@@ -13,14 +13,14 @@
         android:layout_height="wrap_content"
         android:allowUndo="false"
         android:text="Calories left: "
-        android:textColor="@color/fireOrange"
+        android:textColor="@color/colorWhite"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.195"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/target_Steps"
-        app:layout_constraintVertical_bias="0.129" />
+        app:layout_constraintVertical_bias="0.062" />
 
     <TextView
         android:id="@+id/goal_steps"
@@ -28,14 +28,14 @@
         android:layout_height="wrap_content"
         android:allowUndo="false"
         android:text="Steps left: "
-        android:textColor="@color/fireOrange"
+        android:textColor="@color/colorWhite"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.186"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/goal_caloriesLeft"
-        app:layout_constraintVertical_bias="0.151" />
+        app:layout_constraintVertical_bias="0.073" />
 
     <Button
         android:id="@+id/goal_reset"
@@ -54,13 +54,13 @@
 
     <TextView
         android:id="@+id/label_Goal"
-        android:layout_width="155dp"
-        android:layout_height="24dp"
+        android:layout_width="156dp"
+        android:layout_height="40dp"
         android:allowUndo="false"
-        android:background="@drawable/login_rounded_button"
         android:gravity="center"
         android:text="GOAL"
         android:textColor="@color/colorWhite"
+        android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -76,7 +76,7 @@
         android:layout_marginTop="68dp"
         android:allowUndo="false"
         android:text="Target Calories to burn: "
-        android:textColor="@color/fireOrange"
+        android:textColor="@color/colorWhite"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -89,15 +89,14 @@
         android:id="@+id/target_Steps"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="56dp"
         android:allowUndo="false"
         android:text="Target Steps to complete: "
-        android:textColor="@color/fireOrange"
+        android:textColor="@color/colorWhite"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.262"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/target_Calories"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.048" />
 </androidx.constraintlayout.widget.ConstraintLayout>

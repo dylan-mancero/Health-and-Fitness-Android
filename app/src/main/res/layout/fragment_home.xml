@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginBottom="56dp"
-    android:background="@color/extremelyLightGrey"
+    android:background="@color/colorWhite"
     tools:context=".fragments.HomeFragment">
 
     <!-- TODO: Update blank fragment layout -->
@@ -15,9 +15,9 @@
         android:layout_width="88dp"
         android:layout_height="39dp"
         android:layout_marginTop="32dp"
-        android:background="@color/darkNavyBlue"
+        android:background="@drawable/orange_gradient_button"
         android:text="Goals"
-        android:textColor="@color/fireOrange"
+        android:textColor="@color/colorWhite"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
@@ -104,7 +104,7 @@
         android:layout_width="130dp"
         android:layout_height="28dp"
         android:layout_marginTop="31dp"
-        android:background="@color/fireOrange"
+        android:background="@drawable/orange_gradient_outline_button"
         android:gravity="center_horizontal"
         app:layout_constraintBottom_toTopOf="@+id/tableLayout"
         app:layout_constraintEnd_toEndOf="parent"

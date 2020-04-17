@@ -36,9 +36,6 @@ public class ActivityHistoryPopupActivity extends Activity {
         date = findViewById(R.id.fill_Time);
         caloriesBurnt = findViewById(R.id.fill_CaloriesBurnt);
         duration = findViewById(R.id.fill_Duration);
-
-        //getallpastactivities().getValues().getPosition().getDuration etc...
-        //getallpastactivities().getValues().getPosition().getCalories etc... linking to xml box.
         name.setText(finishedActivityReceived.getActivity().getName());
         date.setText(finishedActivityReceived.getStart().toString());
 
@@ -61,7 +58,7 @@ public class ActivityHistoryPopupActivity extends Activity {
         int height = dm.heightPixels;
 
         //Set width and height for popup window in ratio of screen size using multipliers.
-        getWindow().setLayout((int) (width * 0.7), (int) (height * 0.7));
+        getWindow().setLayout((int) (width * 0.8), (int) (height * 0.55));
 
     }
 }

@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/constraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/darkNavyBlue">
+    android:background="@drawable/popup_background">
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/image"
@@ -17,111 +16,111 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.126" />
+        app:layout_constraintVertical_bias="0.113" />
 
     <TextView
         android:id="@+id/label_Report"
-        android:layout_width="130dp"
-        android:layout_height="wrap_content"
+        android:layout_width="159dp"
+        android:layout_height="45dp"
         android:allowUndo="false"
-        android:background="@color/darkNavyBlue"
         android:gravity="center"
         android:text="ActivityName"
-        android:textColor="@color/fireOrange"
+        android:textColor="@color/colorWhite"
+        android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/image"
-        app:layout_constraintVertical_bias="0.044" />
-
-    <TextView
-        android:id="@+id/label_CaloriesBurnt"
-        android:layout_width="119dp"
-        android:layout_height="20dp"
-        android:layout_marginTop="68dp"
-        android:allowUndo="false"
-        android:text="Calories Burnt: "
-        android:textColor="@color/fireOrange"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.143"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/label_Report"
         app:layout_constraintVertical_bias="0.0" />
 
-    <TextView
-        android:id="@+id/label_Duration"
-        android:layout_width="119dp"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/label_CaloriesBurnt"
-        android:layout_marginTop="56dp"
-        android:allowUndo="false"
-        android:text="Duration: "
-        android:textColor="@color/fireOrange"
-        android:textStyle="bold"
+    <TableLayout
+        android:layout_width="268dp"
+        android:layout_height="141dp"
+        android:stretchColumns="*"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.143"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/label_CaloriesBurnt"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <TextView
-        android:id="@+id/label_Time"
-        android:layout_width="119dp"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/label_Duration"
-        android:layout_marginTop="52dp"
-        android:allowUndo="false"
-        android:text="Time of Day: "
-        android:textColor="@color/fireOrange"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.143"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/label_Duration"
-        app:layout_constraintVertical_bias="0.057" />
-
-    <TextView
-        android:id="@+id/fill_CaloriesBurnt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        android:textColor="@color/fireOrange"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.267"
-        app:layout_constraintStart_toEndOf="@+id/label_CaloriesBurnt"
         app:layout_constraintTop_toBottomOf="@+id/label_Report"
-        app:layout_constraintVertical_bias="0.148" />
+        app:layout_constraintVertical_bias="0.54">
 
-    <TextView
-        android:id="@+id/fill_Duration"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        android:textColor="@color/fireOrange"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.267"
-        app:layout_constraintStart_toEndOf="@+id/label_Duration"
-        app:layout_constraintTop_toBottomOf="@+id/fill_CaloriesBurnt"
-        app:layout_constraintVertical_bias="0.175" />
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingBottom="30dp">
 
-    <TextView
-        android:id="@+id/fill_Time"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        android:textColor="@color/fireOrange"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.267"
-        app:layout_constraintStart_toEndOf="@+id/label_Time"
-        app:layout_constraintTop_toBottomOf="@+id/fill_Duration"
-        app:layout_constraintVertical_bias="0.222" />
+            <TextView
+                android:id="@+id/label_CaloriesBurnt"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:allowUndo="false"
+                android:text="Calories Burnt: "
+                android:textColor="@color/colorWhite"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/fill_CaloriesBurnt"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center|right"
+                android:text="TextView"
+                android:textColor="@color/colorWhite"
+                android:textSize="14sp" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingBottom="30dp">
+
+            <TextView
+                android:id="@+id/label_Duration"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:allowUndo="false"
+                android:text="Duration: "
+                android:textColor="@color/colorWhite"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/fill_Duration"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center|right"
+                android:text="TextView"
+                android:textColor="@color/colorWhite"
+                android:textSize="14sp" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/label_Time"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:allowUndo="false"
+                android:text="Time of Day: "
+                android:textColor="@color/colorWhite"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/fill_Time"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center|right"
+                android:text="TextView"
+                android:textColor="@color/colorWhite"
+                android:textSize="14sp" />
+
+        </TableRow>
+
+    </TableLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -24,6 +24,6 @@ public class GoalBtnPopupActivity extends Activity {
         int height = dm.heightPixels;
 
         //Set width and height for popup window in ratio of screen size using multipliers.
-        getWindow().setLayout((int) (width * 0.7), (int) (height * 0.7));
+        getWindow().setLayout((int) (width * 0.8), (int) (height * 0.55));
     }
 }

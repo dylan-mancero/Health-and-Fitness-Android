@@ -25,6 +25,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="56dp"
         android:text="Fat"
+        android:textColor="@color/fireOrange"
         app:layout_constraintBottom_toTopOf="@+id/textView9"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.528"
@@ -34,10 +35,11 @@
 
     <TextView
         android:id="@+id/textView9"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="60dp"
+        android:layout_width="20dp"
+        android:layout_height="21dp"
+        android:layout_marginStart="48dp"
         android:layout_marginBottom="64dp"
+        android:gravity="center"
         android:text="0"
         app:layout_constraintBottom_toTopOf="@+id/foodRecView"
         app:layout_constraintStart_toEndOf="@+id/textView6" />
@@ -48,6 +50,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:text="Carbs"
+        android:textColor="@color/fireOrange"
         app:layout_constraintBottom_toTopOf="@+id/textView6"
         app:layout_constraintStart_toEndOf="@+id/textView7"
         app:layout_constraintTop_toTopOf="parent"
@@ -58,6 +61,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Protein"
+        android:textColor="@color/fireOrange"
         app:layout_constraintBottom_toTopOf="@+id/TxtViewProtein"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.215"
@@ -67,24 +71,26 @@
 
     <TextView
         android:id="@+id/textView11"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="51dp"
+        android:layout_height="21dp"
         android:layout_marginBottom="64dp"
+        android:gravity="center"
         android:text="0"
         app:layout_constraintBottom_toTopOf="@+id/foodRecView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.407"
+        app:layout_constraintHorizontal_bias="0.273"
         app:layout_constraintStart_toEndOf="@+id/textView9" />
 
     <TextView
         android:id="@+id/TxtViewProtein"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="45dp"
+        android:layout_height="23dp"
         android:layout_marginBottom="64dp"
+        android:gravity="center"
         android:text="0"
         app:layout_constraintBottom_toTopOf="@+id/foodRecView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.24"
+        app:layout_constraintHorizontal_bias="0.213"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
@@ -92,6 +98,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Calories"
+        android:textColor="@color/fireOrange"
         app:layout_constraintBottom_toTopOf="@+id/textView11"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.28"
@@ -101,10 +108,11 @@
 
     <TextView
         android:id="@+id/textView6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="60dp"
+        android:layout_width="39dp"
+        android:layout_height="21dp"
+        android:layout_marginStart="24dp"
         android:layout_marginBottom="64dp"
+        android:gravity="center"
         android:text="0"
         app:layout_constraintBottom_toTopOf="@+id/foodRecView"
         app:layout_constraintStart_toEndOf="@+id/TxtViewProtein" />
@@ -114,11 +122,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:allowUndo="false"
-        android:background="@drawable/login_rounded_button"
+        android:background="@color/colorWhite"
         android:ems="10"
         android:gravity="center"
         android:text="Food History"
-        android:textColor="@color/colorWhite"
+        android:textColor="@color/headingGrey"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -131,15 +139,17 @@
         android:id="@+id/addNewFoodBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:backgroundTint="@color/colorWhite"
         android:clickable="true"
         android:src="@android:drawable/ic_input_add"
+        android:tint="@color/fireOrange"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.89"
+        app:layout_constraintHorizontal_bias="0.943"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.574" />
+        app:layout_constraintVertical_bias="0.8" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
