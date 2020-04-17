@@ -74,20 +74,16 @@ public class MainActivity extends AppCompatActivity implements AddFutureActivity
 
                     case R.id.nav_home :
                         mMainFrame.removeAllViewsInLayout();
-                        mMainNav.setItemBackgroundResource(R.color.colorPrimary);
                         mMainFrame.addView(mMainPageSlider);
-                        //setFragment(navHomeFragment);
                         return true;
 
                     case R.id.nav_foodHistory :
                         mMainFrame.removeAllViews();
-                        mMainNav.setItemBackgroundResource(R.color.colorPrimary);
                         setFragment(navFoodHistoryFragment);
                         return true;
 
                     case R.id.nav_activityHistory :
                         mMainFrame.removeAllViews();
-                        mMainNav.setItemBackgroundResource(R.color.colorPrimary);
                         setFragment(navActivityHistoryFragment);
                         return true;
 

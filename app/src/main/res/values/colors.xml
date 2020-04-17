@@ -1,16 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#D81B60</color>
-    <color name="colorWhite">#ffffff</color>
+    <color name="primary">@color/background</color>
+    <color name="primaryDark">#212121</color>
+    <color name="textGray">#DCDCDC</color>
+    <color name="textLight">#EEEEEE</color>
+    <color name="accent">@color/fireOrange</color>
+    <color name="accentFaded">#E4FF6D00</color>
+
+    <color name="white">#ffffff</color>
     <color name="colorWhiteTransparent">#80ffff</color>
     <color name="extremelyLightGrey">#eeeeee</color>
     <color name="headingGrey">#838181</color>
     <color name="fireOrange">#FF6D00</color>
     <color name="darkNavyBlue">#1E3143</color>
-    <color name="background">#ffffff</color>
-    <color name="navBarBackgroud">#FF6D00</color>
-    <color name="navItemSelected">#eeeeeeee</color>
-    <color name="navItem">#ffffffff</color>
+
+    <color name="background">#F8F8F8</color>
+    <color name="navBarBackground">@color/background</color>
+    <color name="navItemSelected">#FF6D00</color>
+    <color name="navItem">@color/textGray</color>
+    <color name="activityProgressBar">@color/fireOrange</color>
+
 </resources>

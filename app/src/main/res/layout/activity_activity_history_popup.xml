@@ -25,7 +25,7 @@
         android:allowUndo="false"
         android:gravity="center"
         android:text="ActivityName"
-        android:textColor="@color/colorWhite"
+        android:textColor="@color/white"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -35,7 +35,7 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <TableLayout
-        android:layout_width="268dp"
+        android:layout_width="255dp"
         android:layout_height="141dp"
         android:stretchColumns="*"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -55,7 +55,7 @@
                 android:layout_height="match_parent"
                 android:allowUndo="false"
                 android:text="Calories Burnt: "
-                android:textColor="@color/colorWhite"
+                android:textColor="@color/white"
                 android:textSize="14sp"
                 android:textStyle="bold" />
 
@@ -65,7 +65,7 @@
                 android:layout_height="match_parent"
                 android:gravity="center|right"
                 android:text="TextView"
-                android:textColor="@color/colorWhite"
+                android:textColor="@color/white"
                 android:textSize="14sp" />
 
         </TableRow>
@@ -81,7 +81,7 @@
                 android:layout_height="match_parent"
                 android:allowUndo="false"
                 android:text="Duration: "
-                android:textColor="@color/colorWhite"
+                android:textColor="@color/white"
                 android:textSize="14sp"
                 android:textStyle="bold" />
 
@@ -91,7 +91,7 @@
                 android:layout_height="match_parent"
                 android:gravity="center|right"
                 android:text="TextView"
-                android:textColor="@color/colorWhite"
+                android:textColor="@color/white"
                 android:textSize="14sp" />
 
         </TableRow>
@@ -106,7 +106,7 @@
                 android:layout_height="match_parent"
                 android:allowUndo="false"
                 android:text="Time of Day: "
-                android:textColor="@color/colorWhite"
+                android:textColor="@color/white"
                 android:textSize="14sp"
                 android:textStyle="bold" />
 
@@ -116,7 +116,7 @@
                 android:layout_height="match_parent"
                 android:gravity="center|right"
                 android:text="TextView"
-                android:textColor="@color/colorWhite"
+                android:textColor="@color/white"
                 android:textSize="14sp" />
 
         </TableRow>
