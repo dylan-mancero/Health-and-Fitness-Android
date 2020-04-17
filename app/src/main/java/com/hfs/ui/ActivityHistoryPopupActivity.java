@@ -50,7 +50,7 @@ public class ActivityHistoryPopupActivity extends Activity {
             caloriesBurnt.setText("Not calculated");
         }
 
-        duration.setText(finishedActivityReceived.getDuration().toString());
+        duration.setText(String.valueOf(finishedActivityReceived.getDuration().getSeconds()));
 
         //Setting resolution of pop-up window, in relation to screen size.
         DisplayMetrics dm = new DisplayMetrics();

@@ -25,16 +25,16 @@ public class Activities {
     @Deprecated
     public Activities(ActivitiesDao activitiesDao){
         this.activitiesDao = activitiesDao;
-        this.activities = new ArrayList<>(activitiesDao.loadAllExercises());
-        this.activities.addAll(activitiesDao.loadAllSports());
+        this.activities = new ArrayList<>(activitiesDao.loadAllSports());
+        this.activities.addAll(activitiesDao.loadAllExercises());
     }
 
     private Activities(Application application){
         HFSDatabase db = HFSDatabase.getInstance(application);
         this.activitiesDao = db.activitiesDao();
 
-        activities = new ArrayList<>(this.activitiesDao.loadAllExercises());
-        activities.addAll(this.activitiesDao.loadAllSports());
+        activities = new ArrayList<>(this.activitiesDao.loadAllSports());
+        activities.addAll(this.activitiesDao.loadAllExercises());
     }
 
     public static synchronized Activities getInstance(Application application){
