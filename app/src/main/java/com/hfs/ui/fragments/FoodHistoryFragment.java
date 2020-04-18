@@ -78,8 +78,17 @@ public class FoodHistoryFragment extends Fragment {
         try {
             final LiveData<List<ConsumableOccurrence>> foodDB = profile.getNutrition().getConsumables();
             List<ConsumableOccurrence> foodList = foodDB.getValue();
-
+            //simple way to populate the arrays that will be fed into the recyclerview
+            //could be optimized with a better adapter that takes one list instead of 3 arrays.
             for (ConsumableOccurrence c : foodList) {
+                Log.d(TAG, "onCreate"+c.getConsumable().getName());
+                //simple implementation for getting a pizza image, ideally would map the word with available, like activities does.
+                if(c.getConsumable().getName().equals("Pizza")){
+                    fDates.add(c.getDate().toString());
+                    fAmounts.add(Double.toString(c.getAmount()));
+                    fImageUrls.add("https://cdn.dribbble.com/users/252510/screenshots/4218122/pizza-02.png");
+
+                }
                 fDates.add(c.getDate().toString());
                 fAmounts.add(Double.toString(c.getAmount()));
                 fImageUrls.add("https://f1.pngfuel.com/png/263/325/196/food-icon-icon-design-meal-restaurant-dish-logo-line-art-symbol-png-clip-art.png");
