@@ -61,8 +61,19 @@ public class FoodHistoryFragment extends Fragment {
                 .inject(this);
         Log.d(TAG, "onCreateView: "+ profile);
 
+
+        //Initiates the numbers(textviews) on foodhistoryfragment and sets to what nutrition has
+        //currently only gets data input on app launch
         TextView protein = (TextView) view.findViewById(R.id.TxtViewProtein);
         protein.setText(Integer.toString((int)profile.getNutrition().getProtein()));
+        TextView carbs = (TextView) view.findViewById(R.id.txtcarbs);
+        carbs.setText(Integer.toString((int)profile.getNutrition().getProtein()));
+        TextView fats = (TextView) view.findViewById(R.id.txtfat);
+        fats.setText(Integer.toString((int)profile.getNutrition().getProtein()));
+        TextView calories = (TextView) view.findViewById(R.id.txtcal);
+        calories.setText(Integer.toString((int)profile.getNutrition().getProtein()));
+
+
 
         try {
             final LiveData<List<ConsumableOccurrence>> foodDB = profile.getNutrition().getConsumables();

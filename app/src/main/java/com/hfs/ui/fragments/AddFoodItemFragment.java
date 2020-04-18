@@ -58,9 +58,10 @@ public class AddFoodItemFragment extends Fragment {
                 .inject(this);
         Log.d(TAG, "CHECKING................");
 
-        String [] values = new String [6];
+        String [] values = new String [7];
+        values[0]="What did you eat?";
 
-        int count = 0;
+        int count = 1;
         for( Consumable i : consumables.getConsumables()){
             values[count]=i.getName();
             count++;
