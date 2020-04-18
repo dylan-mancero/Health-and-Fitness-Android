@@ -59,7 +59,7 @@ public class AddFoodItemFragment extends Fragment {
         Log.d(TAG, "CHECKING................");
 
         String [] values = new String [7];
-        values[0]="What did you eat?";
+        values[0]="Select an item";
 
         int count = 1;
         for( Consumable i : consumables.getConsumables()){
@@ -113,7 +113,7 @@ public class AddFoodItemFragment extends Fragment {
 
 
                 if(spinner.getSelectedItemPosition() == 0| amount.getText()==null){
-                    Toast.makeText(getActivity(),"Please select a food yo", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(),"Please select a food item to save", Toast.LENGTH_SHORT).show();
                 }
                 else {
 
