@@ -11,6 +11,8 @@ import com.hfs.lib.activity.FinishedActivity;
 import com.hfs.lib.activity.Sport;
 import com.hfs.lib.activity.SportOccurrence;
 
+import java.time.format.DateTimeFormatter;
+
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ActivityHistoryPopupActivity extends Activity {
@@ -37,7 +39,7 @@ public class ActivityHistoryPopupActivity extends Activity {
         caloriesBurnt = findViewById(R.id.fill_CaloriesBurnt);
         duration = findViewById(R.id.fill_Duration);
         name.setText(finishedActivityReceived.getActivity().getName());
-        date.setText(finishedActivityReceived.getStart().toString());
+        date.setText(finishedActivityReceived.getStart().format(DateTimeFormatter.ISO_TIME));
 
         //checks if activity selected is Exercise or Gym activity to determine the Calories burnt.
         if(finishedActivityReceived.getActivity().isSportOrExercise() == com.hfs.lib.activity.Activity.IS_SPORT){
